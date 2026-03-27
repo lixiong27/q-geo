@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 240px;
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+        .main-content {
+            flex: 1;
+            padding: 32px;
+            background: #f5f5f5;
+        }
+        .nav-item {
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .nav-item:hover {
+            background: #555;
+        }
+        .module {
+            display: none;
+        }
+        .module.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="nav-item" data-module="query">Query词中心</div>
+            <div class="nav-item" data-module="content">内容中心</div>
+        </div>
+        <div class="main-content">
+            <div id="query" class="module active">
+                <h1>Query词中心</h1>
+                <p>这是Query词中心的内容</p>
+            </div>
+            <div id="content" class="module">
+                <h1>内容中心</h1>
+                <p>这是内容中心的内容</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    var moduleId = this.getAttribute('data-module');
+
+                    // 隐藏所有模块
+                    document.querySelectorAll('.module').forEach(function(m) {
+                        m.classList.remove('active');
+                    });
+
+                    // 显示目标模块
+                    var targetModule = document.getElementById(moduleId);
+                    if (targetModule) {
+                        targetModule.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
