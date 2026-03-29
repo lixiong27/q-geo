@@ -708,6 +708,201 @@
             display: block;
         }
 
+        /* 数据中心Tab */
+        .data-tab {
+            display: none;
+        }
+        .data-tab.active {
+            display: block;
+        }
+
+        /* GEO分析卡片 */
+        .geo-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .geo-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .geo-model-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .geo-model-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .geo-model-icon.deepseek {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .geo-model-icon.doubao {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .geo-model-icon.qianwen {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .geo-model-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .geo-model-desc {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        /* GEO指标网格 */
+        .geo-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .geo-metric {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .geo-metric-label {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-bottom: 8px;
+        }
+
+        .geo-metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .geo-metric-value.high {
+            color: var(--success);
+        }
+
+        .geo-metric-value.medium {
+            color: #f59e0b;
+        }
+
+        .geo-metric-value.low {
+            color: var(--danger);
+        }
+
+        .geo-metric-change {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* GEO分析详情 */
+        .geo-details {
+            margin-top: 20px;
+        }
+
+        .geo-detail-section {
+            margin-bottom: 16px;
+        }
+
+        .geo-detail-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        .geo-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .geo-keyword {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .geo-keyword.negative {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        /* GEO对比表格 */
+        .geo-comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .geo-comparison-table th,
+        .geo-comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .geo-comparison-table th {
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 13px;
+        }
+
+        .geo-comparison-table td {
+            font-size: 14px;
+            color: var(--gray-900);
+        }
+
+        .geo-score-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            width: 120px;
+        }
+
+        .geo-score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .geo-score-fill.high {
+            background: var(--success);
+        }
+
+        .geo-score-fill.medium {
+            background: #f59e0b;
+        }
+
+        .geo-score-fill.low {
+            background: var(--danger);
+        }
+
         .step-container {
             background: var(--bg-card);
             padding: 24px;
@@ -2033,105 +2228,434 @@
                     <button class="btn btn-secondary">刷新数据</button>
                 </div>
 
-                <div class="filter-bar">
-                    <span class="filter-label">时间范围:</span>
-                    <div class="time-range">
-                        <button class="time-btn">今天</button>
-                        <button class="time-btn active">近7天</button>
-                        <button class="time-btn">近30天</button>
-                        <button class="time-btn">自定义</button>
+                <div class="tabs">
+                    <div class="tab active" data-tab="overview">数据总览</div>
+                    <div class="tab" data-tab="geo">GEO分析</div>
+                </div>
+
+                <!-- 数据总览 -->
+                <div id="data-overview" class="data-tab active">
+                    <div class="filter-bar">
+                        <span class="filter-label">时间范围:</span>
+                        <div class="time-range">
+                            <button class="time-btn">今天</button>
+                            <button class="time-btn active">近7天</button>
+                            <button class="time-btn">近30天</button>
+                            <button class="time-btn">自定义</button>
+                        </div>
+                    </div>
+
+                    <div class="data-cards">
+                        <div class="data-card">
+                            <div class="data-card-label">Query词数量</div>
+                            <div class="data-card-value">1,234</div>
+                            <div class="data-card-change up">↑ 12 (今日新增)</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-card-label">扩词总数</div>
+                            <div class="data-card-value">5,678</div>
+                            <div class="data-card-change up">↑ 56 (今日扩词)</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-card-label">发布文章数</div>
+                            <div class="data-card-value">156</div>
+                            <div class="data-card-change up">↑ 3 (本月新增)</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-card-label">活跃渠道</div>
+                            <div class="data-card-value">4</div>
+                            <div class="data-card-change" style="color: var(--gray-500);">→ 稳定</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div class="card">
+                            <div class="card-title">Query词来源分布</div>
+                            <div class="distribution-list">
+                                <div class="distribution-item">
+                                    <div class="distribution-label">微博</div>
+                                    <div class="distribution-bar-container">
+                                        <div class="distribution-bar" style="width: 36%;"></div>
+                                        <div class="distribution-value">450 (36%)</div>
+                                    </div>
+                                </div>
+                                <div class="distribution-item">
+                                    <div class="distribution-label">知乎</div>
+                                    <div class="distribution-bar-container">
+                                        <div class="distribution-bar" style="width: 26%;"></div>
+                                        <div class="distribution-value">320 (26%)</div>
+                                    </div>
+                                </div>
+                                <div class="distribution-item">
+                                    <div class="distribution-label">百度</div>
+                                    <div class="distribution-bar-container">
+                                        <div class="distribution-bar" style="width: 23%;"></div>
+                                        <div class="distribution-value">280 (23%)</div>
+                                    </div>
+                                </div>
+                                <div class="distribution-item">
+                                    <div class="distribution-label">手动</div>
+                                    <div class="distribution-bar-container">
+                                        <div class="distribution-bar" style="width: 15%;"></div>
+                                        <div class="distribution-value">184 (15%)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">任务执行趋势 (近7天)</div>
+                            <div class="chart-placeholder">
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 80px;"></div>
+                                    <div class="chart-label">周一</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 100px;"></div>
+                                    <div class="chart-label">周二</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 120px;"></div>
+                                    <div class="chart-label">周三</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 90px;"></div>
+                                    <div class="chart-label">周四</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 140px;"></div>
+                                    <div class="chart-label">周五</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 60px;"></div>
+                                    <div class="chart-label">周六</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div class="chart-bar" style="height: 50px;"></div>
+                                    <div class="chart-label">周日</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="data-cards">
-                    <div class="data-card">
-                        <div class="data-card-label">Query词数量</div>
-                        <div class="data-card-value">1,234</div>
-                        <div class="data-card-change up">↑ 12 (今日新增)</div>
+                <!-- GEO分析 -->
+                <div id="data-geo" class="data-tab">
+                    <div class="filter-bar">
+                        <span class="filter-label">分析产品:</span>
+                        <select class="select" style="width: 200px;">
+                            <option>全部产品</option>
+                            <option>产品A</option>
+                            <option>产品B</option>
+                        </select>
+                        <span class="filter-label" style="margin-left: 24px;">时间范围:</span>
+                        <div class="time-range">
+                            <button class="time-btn active">近7天</button>
+                            <button class="time-btn">近30天</button>
+                            <button class="time-btn">近90天</button>
+                        </div>
                     </div>
-                    <div class="data-card">
-                        <div class="data-card-label">扩词总数</div>
-                        <div class="data-card-value">5,678</div>
-                        <div class="data-card-change up">↑ 56 (今日扩词)</div>
-                    </div>
-                    <div class="data-card">
-                        <div class="data-card-label">发布文章数</div>
-                        <div class="data-card-value">156</div>
-                        <div class="data-card-change up">↑ 3 (本月新增)</div>
-                    </div>
-                    <div class="data-card">
-                        <div class="data-card-label">活跃渠道</div>
-                        <div class="data-card-value">4</div>
-                        <div class="data-card-change" style="color: var(--gray-500);">→ 稳定</div>
-                    </div>
-                </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                    <div class="card">
-                        <div class="card-title">Query词来源分布</div>
-                        <div class="distribution-list">
-                            <div class="distribution-item">
-                                <div class="distribution-label">微博</div>
-                                <div class="distribution-bar-container">
-                                    <div class="distribution-bar" style="width: 36%;"></div>
-                                    <div class="distribution-value">450 (36%)</div>
+                    <!-- 大模型分析卡片区域 -->
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+                        <!-- DeepSeek分析卡片 -->
+                        <div class="geo-card">
+                            <div class="geo-card-header">
+                                <div class="geo-model-info">
+                                    <div class="geo-model-icon deepseek">🤖</div>
+                                    <div>
+                                        <div class="geo-model-name">DeepSeek</div>
+                                        <div class="geo-model-desc">深度求索 · 智能分析引擎</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 13px; color: var(--gray-500);">分析时间</div>
+                                    <div style="font-size: 14px; font-weight: 500;">2026-03-29 14:30</div>
                                 </div>
                             </div>
-                            <div class="distribution-item">
-                                <div class="distribution-label">知乎</div>
-                                <div class="distribution-bar-container">
-                                    <div class="distribution-bar" style="width: 26%;"></div>
-                                    <div class="distribution-value">320 (26%)</div>
+                            <div class="geo-metrics">
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品提及率</div>
+                                    <div class="geo-metric-value high">78.5%</div>
+                                    <div class="geo-metric-change">↑ 5.2% 较上周</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品优先度</div>
+                                    <div class="geo-metric-value high">92</div>
+                                    <div class="geo-metric-change">排名 #2</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">正面情感</div>
+                                    <div class="geo-metric-value high">85%</div>
+                                    <div class="geo-metric-change">↑ 3% 较上周</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">推荐指数</div>
+                                    <div class="geo-metric-value medium">7.8</div>
+                                    <div class="geo-metric-change">/ 10</div>
                                 </div>
                             </div>
-                            <div class="distribution-item">
-                                <div class="distribution-label">百度</div>
-                                <div class="distribution-bar-container">
-                                    <div class="distribution-bar" style="width: 23%;"></div>
-                                    <div class="distribution-value">280 (23%)</div>
+                            <div class="geo-details">
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">高频关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword">性价比高</span>
+                                        <span class="geo-keyword">功能齐全</span>
+                                        <span class="geo-keyword">用户体验好</span>
+                                        <span class="geo-keyword">响应速度快</span>
+                                        <span class="geo-keyword">界面简洁</span>
+                                    </div>
+                                </div>
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">负面关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword negative">价格偏高</span>
+                                        <span class="geo-keyword negative">学习成本</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="distribution-item">
-                                <div class="distribution-label">手动</div>
-                                <div class="distribution-bar-container">
-                                    <div class="distribution-bar" style="width: 15%;"></div>
-                                    <div class="distribution-value">184 (15%)</div>
+                        </div>
+
+                        <!-- 豆包分析卡片 -->
+                        <div class="geo-card">
+                            <div class="geo-card-header">
+                                <div class="geo-model-info">
+                                    <div class="geo-model-icon doubao">🎯</div>
+                                    <div>
+                                        <div class="geo-model-name">豆包</div>
+                                        <div class="geo-model-desc">字节跳动 · 智能助手</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 13px; color: var(--gray-500);">分析时间</div>
+                                    <div style="font-size: 14px; font-weight: 500;">2026-03-29 14:25</div>
+                                </div>
+                            </div>
+                            <div class="geo-metrics">
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品提及率</div>
+                                    <div class="geo-metric-value high">82.3%</div>
+                                    <div class="geo-metric-change">↑ 8.1% 较上周</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品优先度</div>
+                                    <div class="geo-metric-value high">95</div>
+                                    <div class="geo-metric-change">排名 #1</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">正面情感</div>
+                                    <div class="geo-metric-value high">91%</div>
+                                    <div class="geo-metric-change">↑ 6% 较上周</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">推荐指数</div>
+                                    <div class="geo-metric-value high">8.5</div>
+                                    <div class="geo-metric-change">/ 10</div>
+                                </div>
+                            </div>
+                            <div class="geo-details">
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">高频关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword">操作简单</span>
+                                        <span class="geo-keyword">功能强大</span>
+                                        <span class="geo-keyword">服务好</span>
+                                        <span class="geo-keyword">更新及时</span>
+                                        <span class="geo-keyword">文档完善</span>
+                                    </div>
+                                </div>
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">负面关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword negative">偶有卡顿</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 千问分析卡片 -->
+                        <div class="geo-card">
+                            <div class="geo-card-header">
+                                <div class="geo-model-info">
+                                    <div class="geo-model-icon qianwen">💡</div>
+                                    <div>
+                                        <div class="geo-model-name">通义千问</div>
+                                        <div class="geo-model-desc">阿里云 · 智能问答</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 13px; color: var(--gray-500);">分析时间</div>
+                                    <div style="font-size: 14px; font-weight: 500;">2026-03-29 14:20</div>
+                                </div>
+                            </div>
+                            <div class="geo-metrics">
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品提及率</div>
+                                    <div class="geo-metric-value medium">65.2%</div>
+                                    <div class="geo-metric-change">↑ 2.3% 较上周</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">产品优先度</div>
+                                    <div class="geo-metric-value medium">78</div>
+                                    <div class="geo-metric-change">排名 #4</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">正面情感</div>
+                                    <div class="geo-metric-value high">79%</div>
+                                    <div class="geo-metric-change">→ 持平</div>
+                                </div>
+                                <div class="geo-metric">
+                                    <div class="geo-metric-label">推荐指数</div>
+                                    <div class="geo-metric-value medium">7.2</div>
+                                    <div class="geo-metric-change">/ 10</div>
+                                </div>
+                            </div>
+                            <div class="geo-details">
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">高频关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword">稳定可靠</span>
+                                        <span class="geo-keyword">接口丰富</span>
+                                        <span class="geo-keyword">社区活跃</span>
+                                        <span class="geo-keyword">案例多</span>
+                                    </div>
+                                </div>
+                                <div class="geo-detail-section">
+                                    <div class="geo-detail-title">负面关联词</div>
+                                    <div class="geo-keywords">
+                                        <span class="geo-keyword negative">配置复杂</span>
+                                        <span class="geo-keyword negative">文档分散</span>
+                                        <span class="geo-keyword negative">版本更新慢</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-title">任务执行趋势 (近7天)</div>
-                        <div class="chart-placeholder">
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 80px;"></div>
-                                <div class="chart-label">周一</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 100px;"></div>
-                                <div class="chart-label">周二</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 120px;"></div>
-                                <div class="chart-label">周三</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 90px;"></div>
-                                <div class="chart-label">周四</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 140px;"></div>
-                                <div class="chart-label">周五</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 60px;"></div>
-                                <div class="chart-label">周六</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div class="chart-bar" style="height: 50px;"></div>
-                                <div class="chart-label">周日</div>
-                            </div>
+                    <!-- 模型对比表格 -->
+                    <div class="card" style="margin-top: 24px;">
+                        <div class="card-title">模型结果对比</div>
+                        <div style="margin-top: 16px; overflow-x: auto;">
+                            <table class="geo-comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>指标</th>
+                                        <th>DeepSeek</th>
+                                        <th>豆包</th>
+                                        <th>千问</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>产品提及率</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 78.5%;"></div>
+                                                </div>
+                                                <span>78.5%</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 82.3%;"></div>
+                                                </div>
+                                                <span>82.3%</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill medium" style="width: 65.2%;"></div>
+                                                </div>
+                                                <span>65.2%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>产品优先度</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 92%;"></div>
+                                                </div>
+                                                <span>92</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 95%;"></div>
+                                                </div>
+                                                <span>95</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill medium" style="width: 78%;"></div>
+                                                </div>
+                                                <span>78</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>正面情感占比</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 85%;"></div>
+                                                </div>
+                                                <span>85%</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 91%;"></div>
+                                                </div>
+                                                <span>91%</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 79%;"></div>
+                                                </div>
+                                                <span>79%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>推荐指数</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill medium" style="width: 78%;"></div>
+                                                </div>
+                                                <span>7.8/10</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill high" style="width: 85%;"></div>
+                                                </div>
+                                                <span>8.5/10</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div class="geo-score-bar">
+                                                    <div class="geo-score-fill medium" style="width: 72%;"></div>
+                                                </div>
+                                                <span>7.2/10</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -2252,6 +2776,15 @@
                 initialPublishTab.classList.add('active');
             }
 
+            // 初始化data模块的第一个tab
+            document.querySelectorAll('.data-tab').forEach(function(t) {
+                t.classList.remove('active');
+            });
+            var initialDataTab = document.getElementById('data-overview');
+            if (initialDataTab) {
+                initialDataTab.classList.add('active');
+            }
+
             // Query词中心Tab切换
             var queryTabs = document.querySelectorAll('#query .tabs .tab');
             queryTabs.forEach(function(tab) {
@@ -2321,6 +2854,32 @@
 
                     // 显示目标tab
                     var targetTab = document.getElementById('publish-' + tabId);
+                    if (targetTab) {
+                        targetTab.classList.add('active');
+                    }
+
+                    // 滚动到页面顶部
+                    document.querySelector('.main-content').scrollTop = 0;
+                });
+            });
+
+            // 数据中心Tab切换
+            var dataTabs = document.querySelectorAll('#data .tabs .tab');
+            dataTabs.forEach(function(tab) {
+                tab.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var tabId = this.getAttribute('data-tab');
+
+                    dataTabs.forEach(function(t) { t.classList.remove('active'); });
+                    this.classList.add('active');
+
+                    // 隐藏所有data tabs
+                    document.querySelectorAll('.data-tab').forEach(function(el) {
+                        el.classList.remove('active');
+                    });
+
+                    // 显示目标tab
+                    var targetTab = document.getElementById('data-' + tabId);
                     if (targetTab) {
                         targetTab.classList.add('active');
                     }
