@@ -1337,6 +1337,10 @@
                     <span class="nav-icon">📊</span>
                     数据中心
                 </div>
+                <div class="nav-item" data-module="geo">
+                    <span class="nav-icon">🤖</span>
+                    GEO分析
+                </div>
             </div>
         </aside>
 
@@ -2229,11 +2233,6 @@
                     <button class="btn btn-secondary">刷新数据</button>
                 </div>
 
-                <div class="tabs">
-                    <div class="tab active" data-tab="overview">数据总览</div>
-                    <div class="tab" data-tab="geo">GEO分析</div>
-                </div>
-
                 <!-- 数据总览 -->
                 <div id="data-overview" class="data-tab active">
                     <div class="filter-bar">
@@ -2339,17 +2338,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- GEO分析 -->
-                <div id="data-geo" class="data-tab">
-                    <div class="filter-bar">
-                        <span class="filter-label">分析产品:</span>
-                        <select class="select" style="width: 200px;">
-                            <option>全部产品</option>
-                            <option>产品A</option>
-                            <option>产品B</option>
-                        </select>
-                        <span class="filter-label" style="margin-left: 24px;">时间范围:</span>
+            <!-- GEO分析模块 -->
+            <div id="geo" class="module">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">GEO分析</h1>
+                        <p class="page-desc">AI大模型分析结果对比</p>
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <span class="filter-label">分析产品:</span>
+                    <select class="select" style="width: 200px;">
+                        <option>全部产品</option>
+                        <option>产品A</option>
+                        <option>产品B</option>
+                    </select>
+                    <span class="filter-label" style="margin-left: 24px;">时间范围:</span>
                         <div class="time-range">
                             <button class="time-btn active">近7天</button>
                             <button class="time-btn">近30天</button>
@@ -2864,31 +2871,6 @@
                 });
             });
 
-            // 数据中心Tab切换
-            var dataTabs = document.querySelectorAll('#data .tabs .tab');
-            dataTabs.forEach(function(tab) {
-                tab.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    var tabId = this.getAttribute('data-tab');
-
-                    dataTabs.forEach(function(t) { t.classList.remove('active'); });
-                    this.classList.add('active');
-
-                    // 隐藏所有data tabs
-                    document.querySelectorAll('.data-tab').forEach(function(el) {
-                        el.classList.remove('active');
-                    });
-
-                    // 显示目标tab
-                    var targetTab = document.getElementById('data-' + tabId);
-                    if (targetTab) {
-                        targetTab.classList.add('active');
-                    }
-
-                    // 滚动到页面顶部
-                    document.querySelector('.main-content').scrollTop = 0;
-                });
-            });
 
             // Filter tags
             document.querySelectorAll('.filter-tag').forEach(function(tag) {
