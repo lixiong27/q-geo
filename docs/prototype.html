@@ -1812,10 +1812,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">内容列表</h3>
-                            <div style="display: flex; gap: 8px;">
-                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">导出</button>
-                                <button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">批量发布</button>
-                            </div>
                         </div>
                         <div class="table-container">
                             <table class="table">
@@ -1823,11 +1819,10 @@
                                     <tr>
                                         <th><input type="checkbox" class="checkbox"></th>
                                         <th>标题</th>
-                                        <th>类型</th>
+                                        <th>来源</th>
                                         <th>生成方式</th>
                                         <th>状态</th>
                                         <th>字数</th>
-                                        <th>创建时间</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
@@ -1835,28 +1830,24 @@
                                     <tr>
                                         <td><input type="checkbox" class="checkbox"></td>
                                         <td><strong>北京天安门旅游全面攻略</strong></td>
-                                        <td><span class="badge badge-info">生成内容</span></td>
+                                        <td><span class="badge badge-info">任务</span></td>
                                         <td><span class="badge source-llm">LLM</span></td>
                                         <td><span class="badge badge-success">已发布</span></td>
                                         <td>2,350</td>
-                                        <td>03-27 14:30</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">查看</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
-                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">发布</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><input type="checkbox" class="checkbox"></td>
                                         <td><strong>GPT-5技术解析</strong></td>
-                                        <td><span class="badge badge-info">生成内容</span></td>
+                                        <td><span class="badge badge-info">任务</span></td>
                                         <td><span class="badge source-claw">Claw</span></td>
                                         <td><span class="badge badge-warning">待审核</span></td>
                                         <td>1,890</td>
-                                        <td>03-27 11:20</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">查看</button>
-                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">审核</button>
                                         </td>
                                     </tr>
@@ -1864,14 +1855,12 @@
                                         <td><input type="checkbox" class="checkbox"></td>
                                         <td><strong>智能驾驶行业观察</strong></td>
                                         <td><span class="badge badge-default">手动</span></td>
-                                        <td><span class="badge source-manual">手动</span></td>
+                                        <td>-</td>
                                         <td><span class="badge badge-default">草稿</span></td>
                                         <td>1,200</td>
-                                        <td>03-26 09:15</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">查看</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
-                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px; color: var(--danger);">删除</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -2794,6 +2783,18 @@
                     document.querySelector('.main-content').scrollTop = 0;
                 });
             });
+
+            // 切换到手动生成内容Tab
+            function switchToContentManual() {
+                var contentTabs = document.querySelectorAll('#content .tabs .tab');
+                contentTabs.forEach(function(t) { t.classList.remove('active'); });
+                document.querySelector('#content .tabs .tab[data-tab="manual"]').classList.add('active');
+
+                document.querySelectorAll('.content-tab').forEach(function(el) {
+                    el.classList.remove('active');
+                });
+                document.getElementById('content-manual').classList.add('active');
+            }
 
             // 内容中心Tab切换
             var contentTabs = document.querySelectorAll('#content .tabs .tab');
