@@ -48,10 +48,20 @@ docs/{需求目录}/
 
 **前端：** Node 12.16.1 + React 16 + Ant Design 4.x
 
-## Git 提交
+## Git 提交规范
 
-```
-feat: AI 功能描述
-fix: AI 修复描述
-docs: AI 文档描述
-```
+**仓库结构：**
+- 外部仓库 (GitHub): `q-geo/`
+- 后端仓库 (GitLab): `backend/ares_analysisterm/`
+- 前端仓库 (GitLab): `front/ares_analysisnode/`
+
+**提交规则：**
+- 类型：build、chore、ci、docs、feat、fix、perf、refactor、revert、style、test
+- 格式：`<type>: AI <subject>`
+- 标题使用英文
+
+**提交流程：**
+1. 小节点完成 → 子仓库内提交到 GitLab
+2. 阶段完成 → 外部仓库提交（记录子仓库变更）
+
+**命令分开执行：** 先 `git add` 再 `git commit`
