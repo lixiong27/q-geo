@@ -373,9 +373,147 @@ public class QScheduleTaskDemoTask {
 
 ---
 
-## 四、开发规范
+## 四、接口响应规范
 
-### 4.1 命名规范
+### 4.1 基础响应对象
+
+所有接口响应继承 `BaseResponse`，统一 `code` 和 `msg` 字段。
+
+```java
+package com.qunar.ug.flight.contact.ares.analysisterm.domain.entity.common;
+
+import lombok.Data;
+import java.util.function.Supplier;
+
+/**
+ * 基础响应对象
+ */
+@Data
+public class BaseResponse {
+    private int code;
+    private String msg;
+
+    public void failure(ResultEnum resultEnum) {
+        this.code = resultEnum.getCode();
+        this.msg = resultEnum.getMsg();
+    }
+
+    public static BaseResponse fail(ResultEnum resultEnum) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(resultEnum.getCode());
+        baseResponse.setMsg(resultEnum.getMsg());
+        return baseResponse;
+    }
+
+    public static BaseResponse success(String msg) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(0);
+        baseResponse.setMsg(msg);
+        return baseResponse;
+    }
+
+    public static <T extends BaseResponse> T fail(ResultEnum resultEnum, Supplier<T> supplier) {
+        T response = supplier.get();
+        response.failure(resultEnum);
+        return response;
+    }
+
+    public static <T extends BaseResponse> T fail(int code, String msg, Supplier<T> supplier) {
+        T response = supplier.get();
+        response.setCode(code);
+        response.setMsg(msg);
+        return response;
+    }
+
+    public static <T extends BaseResponse> T fail(String msg, Supplier<T> supplier) {
+        T response = supplier.get();
+        response.setCode(-500);
+        response.setMsg(msg);
+        return response;
+    }
+}
+```
+
+### 4.2 结果枚举
+
+```java
+package com.qunar.ug.flight.contact.ares.analysisterm.domain.entity.common;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum ResultEnum {
+    SUCCESS(0, "success"),
+    FAIL(-1, "fail"),
+    PARAM_ERROR(-400, "参数错误"),
+    NOT_FOUND(-404, "资源不存在"),
+    SERVER_ERROR(-500, "服务器内部错误");
+
+    private final int code;
+    private final String msg;
+}
+```
+
+### 4.3 响应对象设计原则
+
+1. **继承 BaseResponse**：所有响应对象继承 BaseResponse
+2. **业务数据字段**：在子类中添加具体业务字段
+3. **命名规范**：`{模块}{操作}Response`，如 `HotWordListResponse`
+4. **请求对象**：`{模块}{操作}Request`，如 `HotWordAddRequest`
+
+### 4.4 响应对象示例
+
+```java
+// 列表响应
+@Data
+public class HotWordListResponse extends BaseResponse {
+    private List<HotWord> list;
+    private int total;
+    private int page;
+    private int size;
+}
+
+// 导入响应
+@Data
+public class HotWordImportResponse extends BaseResponse {
+    private int importedCount;
+}
+
+// 请求对象
+@Data
+public class HotWordAddRequest {
+    private String word;
+    private List<String> tags;
+}
+```
+
+### 4.5 Controller 使用示例
+
+```java
+@GetMapping("/list")
+public HotWordListResponse list(HotWordListRequest request) {
+    HotWordListResponse response = new HotWordListResponse();
+    try {
+        PageResult<HotWord> result = hotWordService.list(request);
+        response.setList(result.getList());
+        response.setTotal(result.getTotal());
+        response.setPage(result.getPage());
+        response.setSize(result.getSize());
+        response.setMsg("success");
+    } catch (Exception e) {
+        response.failure(ResultEnum.SERVER_ERROR);
+    }
+    return response;
+}
+```
+
+---
+
+## 五、开发规范
+
+### 5.1 命名规范
 
 | 类型 | 命名规则 | 示例 |
 |------|----------|------|
@@ -386,16 +524,19 @@ public class QScheduleTaskDemoTask {
 | Controller | 模块名 + Controller | `HotWordController` |
 | 定时任务 | 功能名 + Task | `GeoMonitorTask` |
 | QConfig | 模块名 + QConfig | `GeoProviderQConfig` |
+| 响应对象 | 模块+操作+Response | `HotWordListResponse` |
+| 请求对象 | 模块+操作+Request | `HotWordAddRequest` |
 
-### 4.2 包路径规范
+### 5.2 包路径规范
 
 - **实体类：** `com.qunar.ug.flight.contact.ares.analysisterm.domain.entity.{模块}`
+- **公共实体：** `com.qunar.ug.flight.contact.ares.analysisterm.domain.entity.common`
 - **Mapper：** `com.qunar.ug.flight.contact.ares.analysisterm.infra.dao.{模块}`
 - **Service：** `com.qunar.ug.flight.contact.ares.analysisterm.service.{模块}`
 - **Controller：** `com.qunar.ug.flight.contact.ares.analysisterm.web`
 - **定时任务：** `com.qunar.ug.flight.contact.ares.analysisterm.task`
 
-### 4.3 接口路径规范
+### 5.3 接口路径规范
 
 - 统一前缀：`/api`
 - RESTful 风格
@@ -407,9 +548,9 @@ public class QScheduleTaskDemoTask {
 
 ---
 
-## 五、待开发模块
+## 六、待开发模块
 
-### 5.1 热词中心
+### 6.1 热词中心
 
 | 文件 | 路径 |
 |------|------|
@@ -423,7 +564,7 @@ public class QScheduleTaskDemoTask {
 | HotWordTaskService.java | service.hotword |
 | HotWordController.java | web |
 
-### 5.2 内容中心
+### 6.2 内容中心
 
 | 文件 | 路径 |
 |------|------|
@@ -437,7 +578,7 @@ public class QScheduleTaskDemoTask {
 | ContentTaskService.java | service.content |
 | ContentController.java | web |
 
-### 5.3 GEO 分析
+### 6.3 GEO 分析
 
 | 文件 | 路径 |
 |------|------|
@@ -452,14 +593,14 @@ public class QScheduleTaskDemoTask {
 | GeoMonitorController.java | web |
 | GeoMonitorTask.java | task |
 
-### 5.4 数据中心
+### 6.4 数据中心
 
 | 文件 | 路径 |
 |------|------|
 | DataCenterService.java | service.datacenter |
 | DataCenterController.java | web |
 
-### 5.5 发布中心
+### 6.5 发布中心
 
 | 文件 | 路径 |
 |------|------|
@@ -475,7 +616,7 @@ public class QScheduleTaskDemoTask {
 
 ---
 
-## 六、数据库建表
+## 七、数据库建表
 
 详见各模块设计文档：
 - `docs/20260330-geo-init/design/热词中心.md`
