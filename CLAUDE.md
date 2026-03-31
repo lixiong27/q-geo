@@ -39,6 +39,9 @@ docs/{需求目录}/progress.md
 docs/{需求目录}/
 ├── design/           # 模块设计文档
 ├── tech-spec/        # 技术方案
+├── test/             # 测试用例
+│   ├── backend-api-test.md      # 后端接口测试用例
+│   └── frontend-page-test.md    # 前端页面测试用例
 └── progress.md       # 进度追踪
 ```
 
