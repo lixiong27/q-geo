@@ -3213,6 +3213,18 @@
             }
         }
 
+        // ==================== 渠道管理 ====================
+
+        // 渠道数据（模拟后端数据）- 必须在其他代码使用前定义
+        var channelData = [
+            { id: 1, name: '微博', code: 'weibo', icon: '📱', isBuiltin: true, active: true },
+            { id: 2, name: '知乎', code: 'zhihu', icon: '📝', isBuiltin: true, active: true },
+            { id: 3, name: '微信公众号', code: 'wechat', icon: '💬', isBuiltin: true, active: true },
+            { id: 4, name: '小红书', code: 'xiaohongshu', icon: '📕', isBuiltin: true, active: true },
+            { id: 5, name: '抖音', code: 'douyin', icon: '🎵', isBuiltin: true, active: false },
+            { id: 6, name: 'B站', code: 'bilibili', icon: '📺', isBuiltin: true, active: false }
+        ];
+
         // 初始化状态筛选按钮事件
         document.querySelectorAll('.status-filters .filter-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
@@ -3222,18 +3234,6 @@
 
         // 初始化渲染
         renderPublishTaskList();
-
-        // ==================== 渠道管理 ====================
-
-        // 渠道数据（模拟后端数据）
-        var channelData = [
-            { id: 1, name: '微博', code: 'weibo', icon: '📱', isBuiltin: true, active: true },
-            { id: 2, name: '知乎', code: 'zhihu', icon: '📝', isBuiltin: true, active: true },
-            { id: 3, name: '微信公众号', code: 'wechat', icon: '💬', isBuiltin: true, active: true },
-            { id: 4, name: '小红书', code: 'xiaohongshu', icon: '📕', isBuiltin: true, active: true },
-            { id: 5, name: '抖音', code: 'douyin', icon: '🎵', isBuiltin: true, active: false },
-            { id: 6, name: 'B站', code: 'bilibili', icon: '📺', isBuiltin: true, active: false }
-        ];
 
         // 渲染渠道列表
         function renderChannelList() {

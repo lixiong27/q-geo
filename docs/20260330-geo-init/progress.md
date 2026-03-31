@@ -4,6 +4,8 @@
 
 基于现有后端 Demo (ares_analysisterm) 扩展实现 GEO 运营平台。
 
+**后端工程已存在**：`backend/ares_analysisterm/`
+
 ---
 
 ## 目录结构
@@ -15,13 +17,21 @@ q-geo/
 │       ├── pom.xml                     # 父 POM
 │       └── mkt_ares_analysisterm_web/  # Web 模块
 │           ├── pom.xml
-│           └── src/main/java/com/qunar/ug/flight/contact/ares/analysisterm/
-│               ├── Application.java           # 启动类
-│               ├── controller/                 # 控制器
-│               ├── service/                    # 服务层
-│               ├── task/                       # 定时任务
-│               ├── bean/                       # Bean 定义
-│               └── tcdev/factory/              # 配置工厂
+│           └── src/main/
+│               ├── java/com/qunar/ug/flight/contact/ares/analysisterm/
+│               │   ├── Application.java         # 启动类
+│               │   ├── domain/                   # 领域层
+│               │   │   └── entity/               # 实体类
+│               │   ├── infra/                    # 基础设施层
+│               │   │   ├── config/               # 配置类
+│               │   │   ├── configuration/        # 组件配置
+│               │   │   ├── dao/                  # Mapper 接口
+│               │   │   └── qconfig/              # QConfig 配置服务
+│               │   ├── service/                  # 服务层
+│               │   ├── web/                      # 控制层
+│               │   └── task/                     # 定时任务
+│               └── resources/
+│                   └── mapper/                   # Mapper XML
 │
 ├── front/                               # 前端项目 (待创建)
 │
@@ -38,6 +48,8 @@ q-geo/
         │   └── backend-spec.md          # 后端技术方案
         └── progress.md                  # 本进度文件
 ```
+
+**后端分支：** `20260330-geoInit-FD-401306`
 
 ---
 
@@ -114,10 +126,12 @@ q-geo/
 ### 后端
 - Java 8
 - Spring Boot 2.6.6
+- MyBatis 3.x
+- Lombok
 - QConfig（配置中心）
 - QSchedule（定时任务）
 - qclient-redis
-- db-datasource（MySQL）
+- pxc-datasource（MySQL）
 
 ### 前端
 - Node.js 12.16.1
