@@ -1,0 +1,6 @@
+interface:
+  display_name: "Noah MySQL"
+  short_description: "Resolve Noah beta MySQL by envCode/appCode or project config"
+  default_prompt: "Use $noah-mysql-skill to resolve a Noah beta MySQL connection from envCode/appCode or the current project's qunar config, verify connectivity, and run SQL safely."
+policy:
+  allow_implicit_invocation: true

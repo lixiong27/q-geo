@@ -33,23 +33,32 @@ q-geo/
 │               └── resources/
 │                   └── mapper/                   # Mapper XML
 │
-├── front/                               # 前端项目 (待创建)
+├── front/
+│   └── ares_analysisnode/              # 前端项目
+│       ├── src/
+│       │   ├── api/                    # API 服务
+│       │   ├── components/             # 组件
+│       │   ├── pages/                  # 页面
+│       │   └── setupProxy.js           # 本地代理配置
+│       └── package.json
+│
+├── scripts/                         # 快捷脚本
+│   ├── start-frontend.sh            # 启动前端
+│   ├── restart-frontend.sh          # 重启前端
+│   ├── stop-frontend.sh             # 停止前端
+│   └── status.sh                    # 服务状态检查
 │
 └── docs/
     └── 20260330-geo-init/              # 本次迭代文档
         ├── design/                      # 设计文档
-        │   ├── GEO分析.md               # GEO 分析模块设计
-        │   ├── 数据中心.md              # 数据中心模块设计
-        │   ├── 热词中心.md              # 热词中心模块设计
-        │   ├── 内容中心.md              # 内容中心模块设计
-        │   └── 发布中心.md              # 发布中心模块设计
         ├── tech-spec/                   # 技术方案
-        │   ├── frontend-spec.md         # 前端技术方案
-        │   └── backend-spec.md          # 后端技术方案
+        │   ├── frontend-spec.md
+        │   ├── backend-spec.md
+        │   └── sql/schema.sql           # 数据库建表脚本
         ├── test/                        # 测试用例
-        │   ├── backend-api-test.md      # 后端接口测试用例
-        │   └── frontend-page-test.md    # 前端页面测试用例
-        └── progress.md                  # 本进度文件
+        │   ├── test-cases.md            # 按模块组织的测试用例
+        │   └── testing-guide.md         # 测试指南
+        └── progress.md
 ```
 
 **后端分支：** `20260330-geoInit-FD-401306`
@@ -74,13 +83,13 @@ q-geo/
 |------|------|------|
 | 前端技术方案 | ✅ 完成 | Node 12.16.1 + React + Ant Design |
 | 后端技术方案 | ✅ 完成 | 基于现有 Demo，使用 Qunar 内部框架 |
-| 接口文档 | ❌ 待完成 | 需要更新为实际后端结构 |
+| 数据库建表脚本 | ✅ 完成 | 8张表 + 初始数据 |
 
 ### 阶段三：后端开发
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| 数据库建表 | ❌ 待开始 | - |
+| 数据库建表 | ✅ 完成 | 已在 mkt_ares_live_beta 创建 8 张表 |
 | 热词模块 Entity | ✅ 完成 | HotWord, HotWordTask |
 | 热词模块 Mapper | ✅ 完成 | HotWordMapper, HotWordTaskMapper |
 | 热词模块 Service | ✅ 完成 | HotWordService, HotWordTaskService (含 Mock LLM) |
@@ -111,12 +120,16 @@ q-geo/
 | GEO 分析页面 | ✅ 完成 | AI 平台排名监控面板 |
 | 数据中心页面 | ✅ 完成 | 汇总统计与趋势图表 |
 | 发布中心页面 | ✅ 完成 | 发布任务/渠道管理两个 Tab |
+| API 服务改造 | ✅ 完成 | 移除 mock，连接真实后端 |
+| 本地代理配置 | ✅ 完成 | setupProxy.js 配置 |
 
 ### 阶段五：联调测试
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| 测试用例文档 | ✅ 完成 | 后端接口测试、前端页面测试 |
+| 测试用例文档 | ✅ 完成 | 按模块组织，合并前后端测试 |
+| 后端本地启动 | ✅ 完成 | IDEA Tomcat 部署，端口 8080 |
+| 前端本地启动 | ✅ 完成 | Node v12.16.1，端口 3000 |
 | 前后端联调 | ❌ 待开始 | - |
 | 功能测试 | ❌ 待开始 | - |
 
@@ -126,25 +139,25 @@ q-geo/
 
 **当前阶段：** 阶段五 - 联调测试
 
+**测试指南：** [guide/testing-guide.md](../../guide/testing-guide.md)
+
 **已完成：**
 - 设计文档（GEO分析、数据中心、热词中心、内容中心、发布中心）
 - 前端技术方案
 - 后端技术方案（基于 Qunar 内部框架）
-- **热词模块后端**（Entity, Mapper, Service, Controller）
-- **热词模块前端**（Layout, 热词管理/挖掘/扩词页面）
-- **内容模块后端**（Entity, Mapper, Service, Controller）
-- **内容模块前端**（内容管理/内容生成页面）
-- **GEO 分析模块后端**（Entity, Mapper, Service, Controller）
-- **GEO 分析模块前端**（AI 平台排名监控面板）
-- **发布中心模块后端**（Entity, Mapper, Service, Controller）
-- **发布中心模块前端**（发布任务/渠道管理页面）
-- **数据中心模块后端**（DataCenterController 聚合查询）
-- **数据中心模块前端**（汇总统计与趋势图表）
+- **数据库建表**（8张表 + 初始数据）
+- **全部模块后端**（Entity, Mapper, Service, Controller）
+- **全部模块前端**（页面 + API 服务）
+- **前端代理配置**（连接后端 8080）
+- **测试用例文档**（按模块组织）
+- **前端本地启动**（Node v12.16.1，端口 3000）
+
+**进行中：**
+- 前后端联调测试
 
 **下一步：**
-1. 数据库建表
+1. 功能测试
 2. QSchedule 定时任务（GEO 监控数据采集）
-3. 前后端联调测试
 
 ---
 
@@ -166,6 +179,7 @@ q-geo/
 - Ant Design 4.x
 - React Router 5.x
 - Axios
+- http-proxy-middleware（本地代理）
 
 ---
 
@@ -174,6 +188,11 @@ q-geo/
 ### 接口规范
 - 统一前缀：`/api`
 - 统一响应格式：`{ code: 0, message: "success", data: {} }`
+
+### 本地开发
+- 后端：IDEA Tomcat 部署，端口 8080
+- 前端：npm start，端口 3000，代理到后端 8080
+- 数据库：mkt_ares_live_beta
 
 ### QConfig 配置 Key
 - GEO Provider 配置：`geo.provider.{code}.logo/description/icon`
