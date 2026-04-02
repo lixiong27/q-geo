@@ -391,6 +391,11 @@
             color: #dc2626;
         }
 
+        .badge-processing {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
         .badge-info {
             background: #dbeafe;
             color: #2563eb;
@@ -1433,7 +1438,7 @@
                 <div class="page-header">
                     <div>
                         <h1 class="page-title">热词中心</h1>
-                        <p class="page-desc">管理热词、热词挖掘、热词扩词</p>
+                        <p class="page-desc">管理热词、热词挖掘、热词扩词、热词分析</p>
                     </div>
                 </div>
 
@@ -1441,6 +1446,7 @@
                     <div class="tab active" data-tab="manage">热词管理</div>
                     <div class="tab" data-tab="dig">热词挖掘</div>
                     <div class="tab" data-tab="expand">热词扩词</div>
+                    <div class="tab" data-tab="analysis">热词分析</div>
                 </div>
 
                 <!-- 热词管理 -->
@@ -1449,8 +1455,15 @@
                         <span class="filter-label">来源:</span>
                         <div class="filter-tags">
                             <span class="filter-tag active">全部</span>
-                            <span class="filter-tag">手动</span>
-                            <span class="filter-tag">挖掘</span>
+                            <span class="filter-tag" style="--tag-color: #9c27b0;">手动</span>
+                            <span class="filter-tag" style="--tag-color: #ff9800;">挖掘</span>
+                            <span class="filter-tag" style="--tag-color: #00bcd4;">分析</span>
+                        </div>
+                        <span class="filter-label" style="margin-left: 24px;">类型:</span>
+                        <div class="filter-tags">
+                            <span class="filter-tag active">全部</span>
+                            <span class="filter-tag">POI分析查询</span>
+                            <span class="filter-tag">平台分析查询</span>
                         </div>
                         <div style="margin-left: auto; display: flex; gap: 12px;">
                             <button class="btn btn-secondary" onclick="openImportModal()">手动导入</button>
@@ -1481,6 +1494,7 @@
                                 <thead>
                                     <tr>
                                         <th>热词</th>
+                                        <th>类型</th>
                                         <th>标签</th>
                                         <th>来源</th>
                                         <th>任务ID</th>
@@ -1489,29 +1503,32 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>北京天安门</strong></td>
-                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">旅游</span></td>
-                                        <td>手动</td>
-                                        <td>-</td>
+                                        <td><strong>北京天安门门票</strong></td>
+                                        <td><span class="badge" style="background: #e3f2fd; color: #1565c0;">POI分析查询</span></td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">景点</span></td>
+                                        <td><span class="badge" style="background: #e0f7fa; color: #00838f;">分析</span></td>
+                                        <td>125</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px; color: var(--danger);">删除</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><strong>GPT-5发布</strong></td>
-                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">科技</span></td>
-                                        <td>挖掘</td>
-                                        <td>123</td>
+                                        <td><strong>故宫开放时间</strong></td>
+                                        <td><span class="badge" style="background: #e3f2fd; color: #1565c0;">POI分析查询</span></td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">景点</span></td>
+                                        <td><span class="badge" style="background: #e0f7fa; color: #00838f;">分析</span></td>
+                                        <td>125</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px; color: var(--danger);">删除</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><strong>两会AI政策</strong></td>
-                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">政策</span></td>
-                                        <td>挖掘</td>
+                                        <td><strong>长城游玩攻略</strong></td>
+                                        <td><span class="badge" style="background: #e3f2fd; color: #1565c0;">POI分析查询</span></td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">攻略</span></td>
+                                        <td><span class="badge" style="background: #e0f7fa; color: #00838f;">分析</span></td>
                                         <td>124</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
@@ -1519,10 +1536,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><strong>智能驾驶</strong></td>
-                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">科技</span></td>
-                                        <td>手动</td>
+                                        <td><strong>热词A</strong></td>
+                                        <td><span class="badge" style="background: #f3e5f5; color: #7b1fa2;">平台分析查询</span></td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">-</span></td>
+                                        <td><span class="badge" style="background: #f3e5f5; color: #7b1fa2;">手动</span></td>
                                         <td>-</td>
+                                        <td>
+                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
+                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px; color: var(--danger);">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>热词B</strong></td>
+                                        <td>-</td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">标签1</span></td>
+                                        <td><span class="badge" style="background: #fff3e0; color: #e65100;">挖掘</span></td>
+                                        <td>123</td>
                                         <td>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">编辑</button>
                                             <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px; color: var(--danger);">删除</button>
@@ -1626,6 +1655,68 @@
                     </div>
                 </div>
 
+                <!-- 热词分析 -->
+                <div id="query-analysis" class="query-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">任务列表</h3>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <button class="btn btn-primary" onclick="openAnalysisTaskModal()">+ 新建任务</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>任务名称</th>
+                                        <th>模型</th>
+                                        <th>状态</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>POI分析任务1</strong></td>
+                                        <td>DeepSeek</td>
+                                        <td><span class="badge badge-success">已完成</span></td>
+                                        <td>2024-04-02 14:30</td>
+                                        <td>
+                                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;" onclick="openAnalysisResultModal()">查看</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>平台分析任务2</strong></td>
+                                        <td>通义千问</td>
+                                        <td><span class="badge badge-processing">运行中</span></td>
+                                        <td>2024-04-02 14:15</td>
+                                        <td>
+                                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">查看</button>
+                                            <button class="btn btn-ghost" style="padding: 4px 8px; font-size: 12px;">取消</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>景点查询分析</strong></td>
+                                        <td>Default</td>
+                                        <td><span class="badge badge-error">失败</span></td>
+                                        <td>2024-04-02 10:00</td>
+                                        <td>
+                                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">重试</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>POI热词分析4</strong></td>
+                                        <td>豆包</td>
+                                        <td><span class="badge" style="background: var(--gray-100); color: var(--gray-600);">待执行</span></td>
+                                        <td>2024-04-02 09:00</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 新增热词弹窗 -->
                 <div id="add-hotword-modal" class="modal-overlay" style="display: none;">
                     <div class="modal" style="width: 400px;">
@@ -1635,12 +1726,20 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <div class="form-label">热词内容</div>
+                                <div class="form-label">热词内容 <span style="color: var(--danger);">*</span></div>
                                 <input type="text" class="input" placeholder="请输入热词">
                             </div>
                             <div class="form-group">
+                                <div class="form-label">热词类型</div>
+                                <select class="select" style="width: 100%;">
+                                    <option value="">请选择类型</option>
+                                    <option value="poiAnalysis">POI分析查询</option>
+                                    <option value="platAnalysis">平台分析查询</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <div class="form-label">标签</div>
-                                <input type="text" class="input" placeholder="多个标签用逗号分隔">
+                                <input type="text" class="input" placeholder="输入后按回车添加">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1650,17 +1749,60 @@
                     </div>
                 </div>
 
+                <!-- 编辑热词弹窗 -->
+                <div id="edit-hotword-modal" class="modal-overlay" style="display: none;">
+                    <div class="modal" style="width: 400px;">
+                        <div class="modal-header">
+                            <h3>编辑热词</h3>
+                            <button class="modal-close" onclick="closeEditHotWordModal()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="form-label">热词内容 <span style="color: var(--danger);">*</span></div>
+                                <input type="text" class="input" value="北京天安门门票">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">热词类型</div>
+                                <select class="select" style="width: 100%;">
+                                    <option value="poiAnalysis" selected>POI分析查询</option>
+                                    <option value="platAnalysis">平台分析查询</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">标签</div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+                                    <span class="tag" style="background: var(--primary-light); color: var(--primary);">景点 <button style="background: none; border: none; cursor: pointer; padding: 0 4px;">×</button></span>
+                                    <span class="tag" style="background: var(--primary-light); color: var(--primary);">旅游 <button style="background: none; border: none; cursor: pointer; padding: 0 4px;">×</button></span>
+                                </div>
+                                <input type="text" class="input" placeholder="输入后按回车添加">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeEditHotWordModal()">取消</button>
+                            <button class="btn btn-primary">确定</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 手动导入弹窗 -->
                 <div id="import-modal" class="modal-overlay" style="display: none;">
                     <div class="modal" style="width: 500px;">
                         <div class="modal-header">
-                            <h3>手动导入</h3>
+                            <h3>手动导入热词</h3>
                             <button class="modal-close" onclick="closeImportModal()">×</button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
+                                <div class="form-label">热词类型</div>
+                                <select class="select" style="width: 100%;">
+                                    <option value="">请选择类型</option>
+                                    <option value="poiAnalysis">POI分析查询</option>
+                                    <option value="platAnalysis">平台分析查询</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <div class="form-label">热词内容 <span style="color: var(--gray-400);">(每行一个)</span></div>
-                                <textarea class="textarea" style="height: 200px;" placeholder="北京天安门&#10;GPT-5发布&#10;智能驾驶"></textarea>
+                                <textarea class="textarea" style="height: 200px;" placeholder="北京天安门门票&#10;故宫开放时间&#10;长城游玩攻略"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1829,6 +1971,129 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" onclick="closeExpandResultModal()">关闭</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 新建热词分析任务弹窗 -->
+                <div id="analysis-task-modal" class="modal-overlay" style="display: none;">
+                    <div class="modal" style="width: 500px;">
+                        <div class="modal-header">
+                            <h3>新建热词分析任务</h3>
+                            <button class="modal-close" onclick="closeAnalysisTaskModal()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="form-label">关联热词 <span style="color: var(--danger);">*</span></div>
+                                <div class="hotword-search-wrapper" style="position: relative;">
+                                    <input type="text" class="input" id="hotword-search-input" placeholder="输入关键词搜索已有热词..." oninput="searchHotWords(this.value)">
+                                    <input type="hidden" id="selected-hotword-id">
+                                    <!-- 搜索结果下拉 -->
+                                    <div id="hotword-search-results" class="search-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid var(--gray-200); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-height: 200px; overflow-y: auto; z-index: 1000;">
+                                    </div>
+                                    <!-- 已选热词显示 -->
+                                    <div id="selected-hotword-display" style="display: none; margin-top: 8px; padding: 8px 12px; background: var(--gray-50); border-radius: 8px; border: 1px solid var(--gray-200);">
+                                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                                            <div>
+                                                <span id="selected-hotword-word" style="font-weight: 500;"></span>
+                                                <span id="selected-hotword-type" class="badge" style="margin-left: 8px; font-size: 11px;"></span>
+                                            </div>
+                                            <button type="button" onclick="clearSelectedHotWord()" style="background: none; border: none; color: var(--gray-500); cursor: pointer; font-size: 16px;">×</button>
+                                        </div>
+                                        <div style="font-size: 12px; color: var(--gray-500); margin-top: 4px;">
+                                            热词ID: <span id="selected-hotword-id-display"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">任务名称 <span style="color: var(--danger);">*</span></div>
+                                <input type="text" class="input" id="analysis-task-name" placeholder="请输入任务名称">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">热词类型 <span style="color: var(--danger);">*</span></div>
+                                <select class="select" style="width: 100%;" id="analysis-task-type">
+                                    <option value="">请选择类型</option>
+                                    <option value="poiAnalysis">POI分析查询</option>
+                                    <option value="platAnalysis">平台分析查询</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">分析模型</div>
+                                <select class="select" style="width: 100%;" id="analysis-task-model">
+                                    <option value="default">Default</option>
+                                    <option value="deepseek">DeepSeek</option>
+                                    <option value="qianwen">通义千问</option>
+                                    <option value="doubao">豆包</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-label">预期数量 <span style="color: var(--danger);">*</span></div>
+                                <select class="select" style="width: 150px;" id="analysis-task-count">
+                                    <option>5</option>
+                                    <option selected>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeAnalysisTaskModal()">取消</button>
+                            <button class="btn btn-primary">开始执行</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分析结果弹窗 -->
+                <div id="analysis-result-modal" class="modal-overlay" style="display: none;">
+                    <div class="modal" style="width: 500px;">
+                        <div class="modal-header">
+                            <h3>分析结果 - POI分析任务1</h3>
+                            <button class="modal-close" onclick="closeAnalysisResultModal()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="margin-bottom: 16px; color: var(--gray-600);">共分析 20 个热词</p>
+                            <div style="max-height: 300px; overflow-y: auto; border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox" checked> <span>北京天安门门票</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox" checked> <span>故宫开放时间</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox"> <span>长城游玩攻略</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox" checked> <span>颐和园门票价格</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox"> <span>天坛公园怎么走</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox" checked> <span>圆明园遗址公园</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox"> <span>鸟巢水立方参观</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox"> <span>北京欢乐谷攻略</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox" checked> <span>香山公园红叶</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0;">
+                                    <input type="checkbox"> <span>北海公园划船</span> <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">POI分析查询</span>
+                                </label>
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <a href="#" style="color: var(--primary); font-size: 13px;">全选</a> / <a href="#" style="color: var(--primary); font-size: 13px;">取消全选</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeAnalysisResultModal()">取消</button>
+                            <button class="btn btn-primary">导入选中</button>
                         </div>
                     </div>
                 </div>
@@ -3533,6 +3798,92 @@
         }
         function closeExpandResultModal() {
             document.getElementById('expand-result-modal').style.display = 'none';
+        }
+
+        // 编辑热词弹窗
+        function openEditHotWordModal() {
+            document.getElementById('edit-hotword-modal').style.display = 'flex';
+        }
+        function closeEditHotWordModal() {
+            document.getElementById('edit-hotword-modal').style.display = 'none';
+        }
+
+        // 新建热词分析任务弹窗
+        function openAnalysisTaskModal() {
+            document.getElementById('analysis-task-modal').style.display = 'flex';
+        }
+        function closeAnalysisTaskModal() {
+            document.getElementById('analysis-task-modal').style.display = 'none';
+            // 清空搜索状态
+            clearSelectedHotWord();
+        }
+
+        // 热词模糊搜索
+        let searchTimeout = null;
+        function searchHotWords(keyword) {
+            if (searchTimeout) clearTimeout(searchTimeout);
+
+            const resultsDiv = document.getElementById('hotword-search-results');
+
+            if (!keyword || keyword.trim().length === 0) {
+                resultsDiv.style.display = 'none';
+                return;
+            }
+
+            // 防抖，延迟搜索
+            searchTimeout = setTimeout(() => {
+                // 模拟搜索结果（实际项目中调用API）
+                const mockResults = [
+                    { id: 101, word: '北京天安门门票', type: 'POI分析查询' },
+                    { id: 102, word: '故宫开放时间', type: 'POI分析查询' },
+                    { id: 103, word: '长城游玩攻略', type: 'POI分析查询' },
+                    { id: 104, word: '颐和园门票价格', type: 'POI分析查询' },
+                ].filter(item => item.word.includes(keyword));
+
+                if (mockResults.length > 0) {
+                    resultsDiv.innerHTML = mockResults.map(item => `
+                        <div onclick="selectHotWord(${item.id}, '${item.word}', '${item.type}')"
+                             style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center;"
+                             onmouseover="this.style.background='var(--gray-50)'"
+                             onmouseout="this.style.background='white'">
+                            <span style="font-weight: 500;">${item.word}</span>
+                            <span class="badge" style="background: #e3f2fd; color: #1565c0; font-size: 11px;">${item.type}</span>
+                        </div>
+                    `).join('');
+                    resultsDiv.style.display = 'block';
+                } else {
+                    resultsDiv.innerHTML = '<div style="padding: 12px; color: var(--gray-500); text-align: center;">未找到匹配的热词</div>';
+                    resultsDiv.style.display = 'block';
+                }
+            }, 300);
+        }
+
+        function selectHotWord(id, word, type) {
+            document.getElementById('selected-hotword-id').value = id;
+            document.getElementById('selected-hotword-word').textContent = word;
+            document.getElementById('selected-hotword-type').textContent = type;
+            document.getElementById('selected-hotword-type').style.background = '#e3f2fd';
+            document.getElementById('selected-hotword-type').style.color = '#1565c0';
+            document.getElementById('selected-hotword-id-display').textContent = id;
+            document.getElementById('selected-hotword-display').style.display = 'block';
+            document.getElementById('hotword-search-input').style.display = 'none';
+            document.getElementById('hotword-search-results').style.display = 'none';
+        }
+
+        function clearSelectedHotWord() {
+            document.getElementById('selected-hotword-id').value = '';
+            document.getElementById('hotword-search-input').value = '';
+            document.getElementById('hotword-search-input').style.display = 'block';
+            document.getElementById('selected-hotword-display').style.display = 'none';
+            document.getElementById('hotword-search-results').style.display = 'none';
+        }
+
+        // 分析结果弹窗
+        function openAnalysisResultModal() {
+            document.getElementById('analysis-result-modal').style.display = 'flex';
+        }
+        function closeAnalysisResultModal() {
+            document.getElementById('analysis-result-modal').style.display = 'none';
         }
 
         // 新建内容任务弹窗

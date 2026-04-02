@@ -56,7 +56,7 @@ docs/20260402-hotword-analysis/
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| 执行数据库变更 | ❌ 待开始 | ALTER TABLE（hot_word 新增 type，hot_word_task 新增 model） |
+| 执行数据库变更 | ✅ 完成 | ALTER TABLE（hot_word 新增 type，hot_word_task 新增 model） |
 
 #### 3.2 实体层修改
 

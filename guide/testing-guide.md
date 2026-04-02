@@ -4,29 +4,32 @@
 
 ### Skills
 
-| Skill | 路径 | 用途 |
-|-------|------|------|
+
+| Skill      | 路径                              | 用途                       |
+| ---------- | --------------------------------- | -------------------------- |
 | Noah MySQL | `.claude/skills/noah-mysql-skill` | 连接 Noah 数据库，执行 SQL |
 
 **Noah MySQL 连接参数：**
+
 ```
-envCode: live-marketing
+envCode: market-analysis
 appCode: mkt_ares_analysisterm
-db-prefix: mysql-mkt_ares_live
-数据库: mkt_ares_live_beta
+db-prefix: mkt_ares_live
+数据库: mkt_ares_live
 ```
 
 ### 脚本命令
 
-| 脚本 | Mac | Windows | 功能 |
-|------|-----|---------|------|
-| 启动后端 | `./scripts/start-backend.sh` | `scripts\start-backend.bat` | Tomcat 启动后端 |
-| 停止后端 | `./scripts/stop-backend.sh` | `scripts\stop-backend.bat` | 停止后端 |
-| 编译后端 | `./scripts/build-backend.sh` | `scripts\build-backend.bat` | Maven 编译 |
-| 启动前端 | `./scripts/start-frontend.sh` | `scripts\start-frontend.bat` | 启动 React 开发服务器 |
-| 停止前端 | `./scripts/stop-frontend.sh` | `scripts\stop-frontend.bat` | 停止前端 |
-| 重启前端 | `./scripts/restart-frontend.sh` | `scripts\restart-frontend.bat` | 重启前端 |
-| 查看状态 | `./scripts/status.sh` | `scripts\status.bat` | 检查服务状态 |
+
+| 脚本     | Mac                             | Windows                        | 功能                  |
+| -------- | ------------------------------- | ------------------------------ | --------------------- |
+| 启动后端 | `./scripts/start-backend.sh`    | `scripts\start-backend.bat`    | Tomcat 启动后端       |
+| 停止后端 | `./scripts/stop-backend.sh`     | `scripts\stop-backend.bat`     | 停止后端              |
+| 编译后端 | `./scripts/build-backend.sh`    | `scripts\build-backend.bat`    | Maven 编译            |
+| 启动前端 | `./scripts/start-frontend.sh`   | `scripts\start-frontend.bat`   | 启动 React 开发服务器 |
+| 停止前端 | `./scripts/stop-frontend.sh`    | `scripts\stop-frontend.bat`    | 停止前端              |
+| 重启前端 | `./scripts/restart-frontend.sh` | `scripts\restart-frontend.bat` | 重启前端              |
+| 查看状态 | `./scripts/status.sh`           | `scripts\status.bat`           | 检查服务状态          |
 
 **配置文件：** `scripts/config/mac.env` 或 `scripts/config/windows.env`
 
@@ -70,8 +73,9 @@ db-prefix: mysql-mkt_ares_live
 
 详见 [environment-setup.md](environment-setup.md)
 
-| 服务 | 端口 | 地址 |
-|------|------|------|
+
+| 服务 | 端口 | 地址                  |
+| ---- | ---- | --------------------- |
 | 后端 | 8080 | http://localhost:8080 |
 | 前端 | 3000 | http://localhost:3000 |
 
@@ -83,13 +87,14 @@ db-prefix: mysql-mkt_ares_live
 
 **命名规则：** `{module}_test_result.md`
 
-| 模块 | 测试结果文档 |
-|------|-------------|
-| 热词中心 | `hot_word_test_result.md` |
-| 内容中心 | `content_test_result.md` |
+
+| 模块     | 测试结果文档                  |
+| -------- | ----------------------------- |
+| 热词中心 | `hot_word_test_result.md`     |
+| 内容中心 | `content_test_result.md`      |
 | GEO 分析 | `geo_analysis_test_result.md` |
-| 发布中心 | `publish_test_result.md` |
-| 数据中心 | `data_center_test_result.md` |
+| 发布中心 | `publish_test_result.md`      |
+| 数据中心 | `data_center_test_result.md`  |
 
 **测试结果文档模板：**
 
