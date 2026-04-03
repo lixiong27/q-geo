@@ -113,15 +113,23 @@ docs/20260402-hotword-analysis/
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| 后端接口测试 | ❌ 待开始 | 新增接口功能验证 |
-| 前端功能测试 | ❌ 待开始 | 类型筛选、热词分析任务流程 |
+| 前端配置化后端域名 | ✅ 完成 | 支持 .env 配置 REACT_APP_BACKEND_URL |
+| Node 版本配置 | ✅ 完成 | .nvmrc 指定 12.16.1 |
+| 前端启动验证 | ✅ 完成 | http://localhost:3000 正常运行 |
+| 后端接口测试 | ✅ 完成 | /api/hotWord/types、/api/hotWord/list、/api/hotWord/models 均正常 |
+| 前端功能测试 | ⏳ 进行中 | 类型筛选、热词分析任务流程 |
 | E2E 测试用例补充 | ❌ 待开始 | 热词分析相关测试用例 |
+
+**接口测试结果（2026-04-03）：**
+- `GET /api/hotWord/types` ✅ - 返回2个类型（POI分析查询、平台分析查询）
+- `GET /api/hotWord/list` ✅ - 返回空列表（符合预期）
+- `GET /api/hotWord/models` ✅ - 返回空列表（符合预期）
 
 ---
 
 ## 当前进度
 
-**当前阶段：** 阶段五 - 联调测试（待开始）
+**当前阶段：** 阶段五 - 联调测试（进行中）
 
 **已完成：**
 - 需求确认
@@ -134,17 +142,25 @@ docs/20260402-hotword-analysis/
 - 数据库初始化（schema.sql 已执行到 Noah 环境）
 - 后端代码实现（实体、配置、Mapper、Service、Controller 全部完成）
 - 前端代码实现（API、页面组件全部完成）
+- 前端配置化后端域名（支持 .env 配置）
+- Node 版本配置（.nvmrc 指定 12.16.1）
+- 前端启动验证（http://localhost:3000 正常运行）
+- 后端接口测试（/api/hotWord/types、/api/hotWord/list、/api/hotWord/models 均正常）
 
 **关键设计变更（2026-04-02）：**
 - 热词分析任务创建时需关联已有热词（通过模糊搜索选择）
 - createAnalysisTask 接口新增必填参数 hotwordId
 - 任务参数中存储关联热词ID和热词内容
 
+**前端配置更新（2026-04-03）：**
+- 新增 `.env` 文件：配置远程后端 URL `http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080`
+- 新增 `.nvmrc` 文件：指定 Node.js 12.16.1
+- 更新 `.gitignore`：忽略 `.env.local`，保留 `.env` 作为共享默认配置
+- 更新 `setupProxy.js`：从环境变量读取后端 URL
+
 **下一步：**
-1. 执行数据库变更（hot_word 新增 type 字段，hot_word_task 新增 model 字段）
-2. 后端接口测试
-3. 前端功能测试
-4. E2E 测试用例补充
+1. 前端功能测试（类型筛选、热词分析任务流程）
+2. E2E 测试用例补充
 
 **关联需求：**
 - 基于主需求 [docs/20260330-geo-init/](../20260330-geo-init/) 的热词模块扩展

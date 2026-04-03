@@ -1,0 +1,6 @@
+interface:
+  display_name: "Noah Deploy Auto Dev"
+  short_description: "Resolve current-repo deployment parameters and trigger Noah beta deployment"
+  default_prompt: "Use $noah_deploy_auto_dev to resolve branch, appCode, envCode, and userId from the current repository or explicit user input, then trigger a real Noah beta deployment without depending on the legacy noah_deploy skill."
+policy:
+  allow_implicit_invocation: true
