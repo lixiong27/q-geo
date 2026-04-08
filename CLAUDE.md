@@ -33,6 +33,14 @@ docs/{需求目录}/progress.md
 
 任务完成后，更新 progress.md 中对应任务状态。
 
+**新需求初始化**
+
+创建新需求时，复制模板创建 progress.md：
+```
+cp docs/progress-template.md docs/{需求目录}/progress.md
+```
+模板路径：`docs/progress-template.md`
+
 ## 需求结构
 
 ```
