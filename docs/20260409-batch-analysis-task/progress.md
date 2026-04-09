@@ -8,7 +8,7 @@
 
 ## 当前阶段
 
-**阶段**：方案设计已更新（B方案），待开发
+**阶段**：开发完成，已提交代码
 
 ## 需求描述
 
@@ -120,22 +120,22 @@ handleCallback(taskId, status):
 ## 任务清单
 
 ### 后端改造
-- [ ] HotWordTask 实体新增 `TYPE_BATCH_ANALYSIS` 常量
-- [ ] 新增 BatchAnalysisTaskCreateRequest 请求实体
-- [ ] HotWordMapper 新增 selectByType 方法
-- [ ] HotWordMapper.xml 新增对应 SQL
-- [ ] HotWordService 新增 listByType 方法
-- [ ] HotWordTaskService.createAnalysisTask 支持 sourceBatchTaskId 参数
-- [ ] HotWordTaskService 新增 createBatchAnalysisTask 方法
-- [ ] HotWordTaskService 新增 executeBatchAnalysisTaskAsync 异步执行方法
-- [ ] HotWordTaskService.handleCallback 方法增强：检查 sourceBatchTaskId 并更新批量任务进度
-- [ ] HotWordController 新增批量创建接口
+- [x] HotWordTask 实体新增 `TYPE_BATCH_ANALYSIS` 常量
+- [x] 新增 BatchAnalysisTaskCreateRequest 请求实体
+- [x] HotWordMapper 新增 selectByType 方法
+- [x] HotWordMapper.xml 新增对应 SQL
+- [x] HotWordService 新增 listByType 方法
+- [x] HotWordTaskService.createAnalysisTask 支持 sourceBatchTaskId 参数
+- [x] HotWordTaskService 新增 createBatchAnalysisTask 方法
+- [x] HotWordTaskService 新增 executeBatchAnalysisTaskAsync 异步执行方法
+- [x] HotWordTaskService.handleCallback 方法增强：检查 sourceBatchTaskId 并更新批量任务进度
+- [x] HotWordController 新增批量创建接口
 
 ### 前端改造
-- [ ] HotWordAnalysis.jsx 新增「批量创建」按钮
-- [ ] 新增批量创建 Modal（类型选择 + 模型多选）
-- [ ] 批量任务列表展示（点击查看详情时实时查询进度）
-- [ ] API 新增 createBatchAnalysisTask 方法
+- [x] HotWordAnalysis.jsx 新增「批量创建」按钮
+- [x] 新增批量创建 Modal（类型选择 + 模型多选）
+- [x] 批量任务列表展示（点击查看详情时实时查询进度）
+- [x] API 新增 createBatchAnalysisTask 方法
 
 ### 前端交互逻辑
 - 批量任务列表只展示基本信息（ID、类型、状态、创建时间）
@@ -150,10 +150,13 @@ handleCallback(taskId, status):
 | 2026-04-09 | 需求分析，创建设计文档 | 已完成 |
 | 2026-04-10 | 方案更新：采用B方案，明确 sourceBatchTaskId 字段和回调逻辑 | 已完成 |
 | 2026-04-10 | 移除预期数量字段，查询该类型下所有热词 | 已完成 |
+| 2026-04-10 | 后端开发完成：批量任务创建、异步执行、回调进度更新 | 已完成 |
+| 2026-04-10 | 前端开发完成：批量创建UI、任务列表展示 | 已完成 |
+| 2026-04-10 | 代码提交并推送到三个仓库 | 已完成 |
 
 ## 下一步行动
 
-开始后端开发
+功能开发完成，可以进行联调测试
 
 ## 风险与对策
 
