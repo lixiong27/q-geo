@@ -9,3 +9,6 @@
 # Temp files
 *.tmp
 *.temp
+
+# Logs
+logs/
