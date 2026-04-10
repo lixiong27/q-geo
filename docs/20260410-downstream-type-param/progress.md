@@ -123,9 +123,9 @@ String returnedTaskId = downstreamTaskClient.createTask(
 - [x] ClawTaskExecutor 传递 default
 - [x] PublishTaskExecutor 传递 default
 - [x] 编译验证
-- [ ] 提交代码
+- [x] 提交代码
 
 ## 当前进度
 
-**阶段：** 编码完成，待提交
-**下一步：** 提交代码
+**阶段：** 已完成
+**提交记录：** efe9e37 feat: AI add type parameter for downstream task creation
