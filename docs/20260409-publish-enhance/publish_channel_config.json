@@ -1,0 +1,96 @@
+{
+  "weibo": {
+    "name": "微博",
+    "icon": "weibo",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到微博：\n标题：{title}\n内容：{content}\n\n要求：字数控制在2000字以内，添加相关话题标签 #话题#。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.weibo.com/2/statuses/share.json",
+    "timeout": 15000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "visible": 0
+    }
+  },
+  "zhihu": {
+    "name": "知乎",
+    "icon": "zhihu",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到知乎专栏：\n标题：{title}\n内容：{content}\n\n要求：保持原意，适当调整格式以适应知乎风格。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.zhihu.com/v1/articles",
+    "timeout": 30000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "columnId": "",
+      "canComment": true
+    }
+  },
+  "wechat": {
+    "name": "微信公众号",
+    "icon": "wechat",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到微信公众号：\n标题：{title}\n内容：{content}\n\n要求：添加摘要，调整格式为公众号风格，可添加阅读原文链接。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.weixin.qq.com/cgi-bin/material/add_news",
+    "timeout": 60000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "mediaId": "",
+      "needOpenComment": true,
+      "onlyFansCanComment": false
+    }
+  },
+  "xiaohongshu": {
+    "name": "小红书",
+    "icon": "xiaohongshu",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到小红书：\n标题：{title}\n内容：{content}\n\n要求：添加吸引人的开头，使用小红书风格排版，添加相关话题标签。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.xiaohongshu.com/v1/notes",
+    "timeout": 30000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "noteType": "normal",
+      "postTime": "immediate"
+    }
+  },
+  "douyin": {
+    "name": "抖音",
+    "icon": "douyin",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到抖音：\n标题：{title}\n内容：{content}\n\n要求：适合短视频平台风格，字数精简，突出重点。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.douyin.com/v1/video/create",
+    "timeout": 30000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "videoType": "normal"
+    }
+  },
+  "bilibili": {
+    "name": "B站",
+    "icon": "bilibili",
+    "enabled": true,
+    "isBuiltin": true,
+    "publishMethod": "claw",
+    "prompt": "请将以下内容发布到B站动态：\n标题：{title}\n内容：{content}\n\n要求：适合B站社区风格，可添加相关话题。",
+    "callbackUrl": "http://l-noah6b5liijvu1.auto.beta.cn0.qunar.com:8080/api/publishTask/callback",
+    "apiEndpoint": "https://api.bilibili.com/x/v2/dynamic/create",
+    "timeout": 30000,
+    "maxRetries": 3,
+    "extraConfig": {
+      "dynamicType": 2
+    }
+  }
+}
