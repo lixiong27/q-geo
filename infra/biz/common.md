@@ -9,20 +9,6 @@
 |------|------|------|
 | `/api/dataCenter/all` | GET | 获取所有数据中心 |
 
-## 用户管理
-
-- **Controller**: `UserController`
-
-| 接口 | 方法 | 用途 |
-|------|------|------|
-| `/api/users` | POST | 创建用户 |
-| `/api/users/{id}` | GET | 获取用户 |
-| `/api/users` | GET | 用户列表 |
-
-## 公共 Mapper
-
-- `UserMapper` - 用户数据
-
 ## 前端 API 模块
 
 | 模块 | 用途 |
