@@ -93,11 +93,3 @@ q-geo/
 1. **新会话启动** - Claude 读取 infra.md 获取导航
 2. **任务处理** - 按需查阅 biz/tec 详情
 3. **迭代补充** - 完成新功能后更新对应模块文档
-
-## 实施步骤
-
-1. 创建 infra.md 导航入口
-2. 创建 infra/biz/ 各模块文档
-3. 创建 infra/tec/components.md
-4. 创建 scripts/update-infra.md 更新说明
-5. 迭代补充完善

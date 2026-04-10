@@ -43,8 +43,10 @@ cp docs/progress-template.md docs/{需求目录}/progress.md
 
 ## 需求结构
 
+**目录命名规范：** `yyyyMMdd-需求名称`，例如 `20260410-infra-context`
+
 ```
-docs/{需求目录}/
+docs/{yyyyMMdd-需求目录}/
 ├── design/           # 模块设计文档
 ├── tech-spec/        # 技术方案
 ├── test/             # 测试用例
