@@ -14,22 +14,13 @@
 | `/api/hotWord/all` | GET | 获取所有热词 |
 | `/api/hotWord/add` | POST | 新增热词 |
 | `/api/hotWord/import` | POST | 批量导入热词 |
-| `/api/hotWord/update` | POST | 更新热词 |
-| `/api/hotWord/delete` | POST | 删除热词 |
-| `/api/hotWord/types` | GET | 获取热词类型列表 |
-| `/api/hotWord/models` | GET | 获取模型列表 |
 | `/api/hotWord/task/list` | GET | 任务列表查询 |
-| `/api/hotWord/task/detail` | GET | 任务详情 |
 | `/api/hotWord/task/subTasks` | GET | 子任务列表 |
 | `/api/hotWord/task/dig/create` | POST | 创建挖掘任务 |
 | `/api/hotWord/task/expand/create` | POST | 创建扩展任务 |
 | `/api/hotWord/task/analysis/create` | POST | 创建分析任务 |
 | `/api/hotWord/task/batch/create` | POST | 创建批量任务 |
-| `/api/hotWord/task/cancel` | POST | 取消任务 |
-| `/api/hotWord/task/retry` | POST | 重试任务 |
 | `/api/hotWord/task/callback` | POST | 任务回调 |
-| `/api/hotWord/task/importResults` | POST | 导入任务结果 |
-| `/api/hotWord/task/importAnalysisResults` | POST | 导入分析结果 |
 
 ## Mapper
 
@@ -45,20 +36,12 @@
 | `HotWordExpand.jsx` | 扩展任务页面 |
 | `HotWordAnalysis.jsx` | 分析任务页面 |
 
-## 下游调用
+## 相关配置
 
-- `DownstreamTaskClient.createTask()` - 调用下游 AI 服务创建任务
+- **QConfig**: `hotword_model_config.json`（模型配置）
+- **执行器**: `AnalysisTaskExecutor`
 
-## 相关 QConfig
+## 参考
 
-| 配置 | 说明 |
-|------|------|
-| `hotword_model_config.json` | 模型配置 |
-| `HotWordQConfig` | 热词相关配置类 |
-| `HotFileQConfig` | 公共文件配置 |
-
-## 任务执行器
-
-| 执行器 | 用途 |
-|--------|------|
-| `AnalysisTaskExecutor` | 分析任务执行 |
+- [状态常量](_states.md) - 任务状态、任务类型
+- [数据库表](_tables.md) - hot_word_task 表结构

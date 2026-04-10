@@ -10,7 +10,15 @@
 | 内容生成 | 内容爬取、模板生成 | [biz/content.md](infra/biz/content.md) |
 | 多渠道发布 | 微博、知乎、微信发布 | [biz/publish.md](infra/biz/publish.md) |
 | GEO 分析 | GEO 监控、Provider 管理 | [biz/geo.md](infra/biz/geo.md) |
-| 公共能力 | 跨模块公共组件 | [biz/common.md](infra/biz/common.md) |
+
+## 共享参考
+
+| 文档 | 说明 |
+|------|------|
+| [biz/_states.md](infra/biz/_states.md) | 状态常量 |
+| [biz/_errors.md](infra/biz/_errors.md) | 错误码 |
+| [biz/_tables.md](infra/biz/_tables.md) | 数据库表结构 |
+| [biz/common.md](infra/biz/common.md) | 公共组件 |
 
 ## 技术组件
 

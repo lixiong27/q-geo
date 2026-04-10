@@ -8,16 +8,9 @@
 
 ## API 清单
 
-### GEO 监控
-
 | 接口 | 方法 | 用途 |
 |------|------|------|
 | `/api/geoMonitor/list` | GET | 监控数据列表 |
-
-### GEO Provider
-
-| 接口 | 方法 | 用途 |
-|------|------|------|
 | `/api/geoProvider/list` | GET | Provider 列表 |
 
 ## Mapper
@@ -30,3 +23,7 @@
 | 组件 | 用途 |
 |------|------|
 | `MonitorView.jsx` | 监控视图页面 |
+
+## 参考
+
+- [状态常量](_states.md) - Provider 启用/禁用状态

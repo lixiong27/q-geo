@@ -3,11 +3,7 @@
 ## 数据中心
 
 - **Controller**: `DataCenterController`
-- **前端页面**: `pages/datacenter/`
-
-| 接口 | 方法 | 用途 |
-|------|------|------|
-| `/api/dataCenter/all` | GET | 获取所有数据中心 |
+- **接口**: `/api/dataCenter/all` (GET)
 
 ## 前端 API 模块
 
@@ -25,3 +21,7 @@
 |----|------|
 | `HttpUtils` | HTTP 请求工具 |
 | `JsonUtils` | JSON 序列化工具 |
+
+## 参考
+
+- [错误码](_errors.md) - API 返回错误码
