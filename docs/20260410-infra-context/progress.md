@@ -8,38 +8,41 @@
 
 ## 当前阶段
 
-**阶段**：设计完成，待实施
+**阶段**：已完成
 
 ## 任务清单
 
 ### 文档结构创建
 - [x] 创建 infra.md 导航入口
-- [ ] 创建 infra/biz/ 各模块文档
-  - [ ] hotword.md
-  - [ ] content.md
-  - [ ] publish.md
-  - [ ] geo.md
-  - [ ] common.md
-- [ ] 创建 infra/tec/ 技术组件文档
-  - [ ] components.md
-  - [ ] coding-style.md
-- [ ] 创建 scripts/update-infra.md 更新说明
+- [x] 创建 infra/biz/ 各模块文档
+  - [x] hotword.md
+  - [x] content.md
+  - [x] publish.md
+  - [x] geo.md
+  - [x] common.md
+- [x] 创建 infra/tec/ 技术组件文档
+  - [x] components.md
+  - [x] coding-style.md
+- [x] 创建 scripts/update-infra.md 更新说明
 
 ### 内容填充
-- [ ] 扫描现有代码填充各模块信息
-- [ ] 补充技术组件使用说明
+- [x] 扫描现有代码填充各模块信息
+- [x] 补充技术组件使用说明
 
 ## 进度记录
 
 | 日期 | 内容 | 状态 |
 |------|------|------|
 | 2026-04-10 | 完成设计文档 | 已完成 |
+| 2026-04-10 | 创建 infra.md 导航入口 | 已完成 |
+| 2026-04-10 | 创建业务模块文档 | 已完成 |
+| 2026-04-10 | 创建技术组件文档 | 已完成 |
+| 2026-04-10 | 创建更新说明 | 已完成 |
 
 ## 下一步行动
 
-1. 创建 infra.md 导航入口
-2. 创建 infra 目录结构
-3. 扫描代码填充初始内容
+1. 后续迭代中补充完善各模块细节
+2. 新增功能时更新对应文档
 
 ## 风险与问题
 
