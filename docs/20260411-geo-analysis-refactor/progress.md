@@ -18,30 +18,32 @@
 
 ### 核心参数
 - **周期性参数**：Cron 表达式，支持用户自定义周期
-- **热词模块**：选择 N 组热词（不同 type）
-- **分析模型模块**：配置分析模型
-- **Executor 配置**：本地计算处理器，支持工厂模式扩展
+- **热词模块**：按 type 查询该类型下所有热词
+- **分析任务参数**：models（模型列表）、regions（地域列表，待扩展）
+- **Executor 配置**：本地计算处理器数组，支持工厂模式扩展
 
 ### 业务流程
 
 ```
-用户创建模板（配置热词组、周期、executor）
+geo_analysis_template 触发（QSchedule 轮询 next_execute_time）
     ↓
-geo_analysis_template（存储模板配置）
+创建 geo_analysis_result (status=PENDING)
     ↓
-QSchedule 轮询（检查 next_execute_time）
-    ↓ (到期)
-创建 geo_analysis_result（status=PENDING）
+遍历 groups，每个 group 创建：
+    hot_word_task (type=geo_batch_analysis)
+    params: { templateId, resultId, type, analysisTaskParam, executors }
     ↓
-创建 hot_word_task（type=geo_batch_analysis）
+batch_analysis 任务执行：
+    - 根据 type 查询该类型下所有热词
+    - 遍历热词 × models 创建 sub_analysis 子任务
     ↓
-为每个 type 创建 hot_word_task（type=geo_sub_analysis）
+所有 sub_analysis 完成后 → 触发回调
     ↓
-Executor 执行分析
+回调时依次执行 executors
     ↓
-更新 geo_analysis_result 状态（子任务回调时聚合统计）
+executors 结果存入 geo_analysis_result
     ↓
-生成报表（按 type 分组统计）
+所有 batch_analysis 完成 → 更新 geo_analysis_result (status=COMPLETED)
 ```
 
 ## 数据设计
@@ -55,8 +57,7 @@ Executor 执行分析
 | id | BIGINT | 主键 |
 | name | VARCHAR(128) | 模板名称 |
 | cron_expression | VARCHAR(64) | Cron 表达式（为空表示一次性任务） |
-| hotword_config | TEXT | 热词配置 JSON（按 type 分组） |
-| executor_config | TEXT | Executor 配置 JSON |
+| config | TEXT | 完整配置 JSON（包含 groups） |
 | status | TINYINT | 状态：0-停用 1-启用 |
 | next_execute_time | DATETIME | 下次执行时间 |
 | last_execute_time | DATETIME | 上次执行时间 |
@@ -64,25 +65,42 @@ Executor 执行分析
 | create_time | DATETIME | 创建时间 |
 | update_time | DATETIME | 更新时间 |
 
-**hotword_config 结构示例：**
+**config 结构示例：**
 ```json
 {
   "groups": [
-    { "type": "poiAnalysis", "hotwordIds": [1, 2, 3] },
-    { "type": "platformAnalysis", "hotwordIds": [4, 5, 6] }
+    {
+      "type": "poiAnalysis",
+      "analysisTaskParam": {
+        "models": ["deepseek", "qianwen"],
+        "regions": ["beijing", "shanghai"]
+      },
+      "executors": [
+        { "code": "poiExecutor1", "params": {} },
+        { "code": "poiExecutor2", "params": {} }
+      ]
+    },
+    {
+      "type": "platformAnalysis",
+      "analysisTaskParam": {
+        "models": ["deepseek"],
+        "regions": []
+      },
+      "executors": [
+        { "code": "platformExecutor", "params": {} }
+      ]
+    }
   ]
 }
 ```
 
-**executor_config 结构示例：**
-```json
-{
-  "executors": [
-    { "code": "default", "params": {} },
-    { "code": "custom", "params": { "key": "value" } }
-  ]
-}
-```
+**配置说明：**
+- `groups`: 热词组配置数组
+- `type`: 热词类型，用于查询该类型下所有热词
+- `analysisTaskParam`: 分析任务参数
+  - `models`: 模型列表
+  - `regions`: 地域列表（待扩展）
+- `executors`: 执行器数组，每个 type 可配置多个 executor
 
 #### 2. geo_analysis_result（结果表）
 
@@ -90,22 +108,73 @@ Executor 执行分析
 |------|------|------|
 | id | BIGINT | 主键 |
 | template_id | BIGINT | 关联模板 ID |
-| batch_task_id | BIGINT | 关联批量任务 ID |
 | status | TINYINT | 状态：0-待执行 1-执行中 2-完成 3-失败 |
-| result | TEXT | 结果 JSON（按 type 分组统计） |
+| params | TEXT | 关联任务信息 JSON（batch 任务 ID + 状态） |
+| result | TEXT | 最终分析结果 JSON |
 | execute_time | DATETIME | 执行时间 |
 | create_time | DATETIME | 创建时间 |
 | update_time | DATETIME | 更新时间 |
 
+**params 结构示例：**
+```json
+{
+  "batchTasks": [
+    {
+      "batchTaskId": 123,
+      "type": "poiAnalysis",
+      "status": "completed",
+      "executorResults": [
+        { "code": "poiExecutor1", "status": "completed", "result": {} },
+        { "code": "poiExecutor2", "status": "completed", "result": {} }
+      ]
+    },
+    {
+      "batchTaskId": 124,
+      "type": "platformAnalysis",
+      "status": "running",
+      "executorResults": []
+    }
+  ]
+}
+```
+
 **result 结构示例：**
 ```json
 {
-  "totalTasks": 10,
-  "completedTasks": 8,
-  "failedTasks": 2,
-  "byType": {
-    "poiAnalysis": { "total": 5, "completed": 4, "failed": 1, "avgScore": 85.5 },
-    "platformAnalysis": { "total": 5, "completed": 4, "failed": 1, "avgScore": 78.2 }
+  "poiAnalysis": {
+    "stats": {
+      "totalTasks": 5,
+      "completedTasks": 4,
+      "failedTasks": 1,
+      "avgScore": 85.5
+    },
+    "executorResults": [
+      {
+        "code": "poiExecutor1",
+        "status": "completed",
+        "data": { /* executor 具体输出 */ }
+      },
+      {
+        "code": "poiExecutor2",
+        "status": "completed",
+        "data": { /* executor 具体输出 */ }
+      }
+    ]
+  },
+  "platformAnalysis": {
+    "stats": {
+      "totalTasks": 5,
+      "completedTasks": 4,
+      "failedTasks": 1,
+      "avgScore": 78.2
+    },
+    "executorResults": [
+      {
+        "code": "platformExecutor",
+        "status": "completed",
+        "data": { /* executor 具体输出 */ }
+      }
+    ]
   }
 }
 ```
@@ -145,13 +214,16 @@ Executor 执行分析
 | 日期 | 内容 | 状态 |
 |------|------|------|
 | 2026-04-11 | 需求讨论，确认方案 A（模板表 + 结果表，复用热词任务表） | 已完成 |
-| 2026-04-11 | 创建 progress.md 和设计文档 | 进行中 |
+| 2026-04-11 | 创建 progress.md 和设计文档 | 已完成 |
+| 2026-04-12 | 更新设计：config 合并 hotword+executor，每个 type 独立 executors 数组 | 已完成 |
+| 2026-04-12 | 新增 analysisTaskParam 字段（models, regions），结果表新增 params 字段 | 已完成 |
+| 2026-04-12 | 确认 result 字段结构：按 type 统计 + executorResults | 已完成 |
+| 2026-04-12 | 设计方案确认完成 | 已完成 |
 
 ## 下一步行动
 
-1. 用户在 design/geo-analysis-refactor.md 中标注需要调整的内容
-2. 根据反馈更新设计文档
-3. 编写数据库变更脚本
+1. 编写数据库变更脚本
+2. 开始后端开发
 
 ## 风险与问题
 
