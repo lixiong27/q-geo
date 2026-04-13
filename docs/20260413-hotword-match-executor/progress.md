@@ -60,6 +60,7 @@
 - [x] 实现 DailyPubAnalysisExecutor
 - [x] 更新 Executor 工厂支持 typeLimitList 校验
 - [x] 编译验证代码
+- [x] 修复 referHasAct 逻辑（使用独立配置 key）
 
 ### 阶段三：测试
 - [ ] 单元测试
@@ -70,8 +71,13 @@
 | 日期 | 内容 | 状态 |
 |------|------|------|
 | 2026-04-13 | 确认需求和技术要点 | 已完成 |
+| 2026-04-13 | 编写详细设计文档 | 已完成 |
+| 2026-04-13 | 实现 DailyPubAnalysisExecutor | 已完成 |
+| 2026-04-13 | 编译验证通过 | 已完成 |
+| 2026-04-13 | 修复 referHasAct 逻辑（独立配置 key） | 已完成 |
 
 ## 下一步行动
 
-1. 编写详细设计文档
-2. 开始后端开发
+1. 配置 QConfig 文件（geo_analysis_executor_config.json、geo_analysis_config.json、hotfile.properties）
+2. 单元测试
+3. 集成测试
