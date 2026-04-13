@@ -8,7 +8,7 @@
 
 ## 当前阶段
 
-**阶段**：阶段一 - 设计文档（完成）
+**阶段**：阶段三 - 前端开发（完成）
 
 ## 需求描述
 
@@ -40,17 +40,17 @@ docs/20260411-geo-analysis-refactor/
 - [x] 数据库变更脚本
 
 ### 阶段二：后端开发
-- [ ] Entity 层
-- [ ] Mapper 层
-- [ ] Service 层
-- [ ] Controller 层
-- [ ] Executor 实现
-- [ ] QSchedule 定时任务
+- [x] Entity 层
+- [x] Mapper 层
+- [x] Service 层
+- [x] Controller 层
+- [x] Executor 实现
+- [x] QSchedule 定时任务
 
 ### 阶段三：前端开发
-- [ ] 模板管理页面
-- [ ] 结果报表页面
-- [ ] API 对接
+- [x] 模板管理页面
+- [x] 结果报表页面
+- [x] API 对接
 
 ### 阶段四：联调测试
 - [ ] 后端接口测试
@@ -68,11 +68,27 @@ docs/20260411-geo-analysis-refactor/
 | 2026-04-12 | 设计方案确认完成 | 已完成 |
 | 2026-04-12 | 编写数据库变更脚本 migration.sql | 已完成 |
 | 2026-04-12 | 拆分设计文档到 design/ 目录 | 已完成 |
+| 2026-04-13 | 创建前端设计文档 frontend-design.html（模板管理 + 结果报表页面） | 已完成 |
+| 2026-04-13 | 更新 SQL：cron_expression/执行时间 NOT NULL，新增 template_execute_status 字段 | 已完成 |
+| 2026-04-13 | 同步更新设计文档表结构说明 | 已完成 |
+| 2026-04-13 | 结果表新增 version 乐观锁字段，params/result/execute_time 改为 NOT NULL | 已完成 |
+| 2026-04-13 | Executor 管理设计：Spring Bean + QConfig 映射 + Map<String, Executor> 注入 | 已完成 |
+| 2026-04-13 | 后端 Entity 层：GeoAnalysisTemplate、GeoAnalysisResult（含 version 乐观锁） | 已完成 |
+| 2026-04-13 | 后端 Mapper 层：GeoAnalysisTemplateMapper、GeoAnalysisResultMapper（含 updateWithVersion） | 已完成 |
+| 2026-04-13 | 后端 QConfig：GeoAnalysisQConfig 动态加载 executor 配置 | 已完成 |
+| 2026-04-13 | 后端 Executor：GeoAnalysisExecutor 接口、GeoAnalysisExecutorFactory、PoiScoreExecutor 示例 | 已完成 |
+| 2026-04-13 | 后端 Service：GeoAnalysisTemplateService、GeoAnalysisResultService | 已完成 |
+| 2026-04-13 | 后端 Controller：GeoAnalysisController REST 接口 | 已完成 |
+| 2026-04-13 | 后端 QSchedule：GeoAnalysisScheduleTask 定时轮询待执行模板 | 已完成 |
+| 2026-04-13 | 前端 API：src/api/geo.js 接口对接 | 已完成 |
+| 2026-04-13 | 前端页面：GeoAnalysisTemplate 模板管理（含分析组配置弹窗） | 已完成 |
+| 2026-04-13 | 前端页面：GeoAnalysisResult 结果报表（含统计卡片、执行器结果时间线） | 已完成 |
+| 2026-04-13 | 前端页面：index.jsx 主页面 Tab 导航（监控大屏/分析模板/执行结果） | 已完成 |
 
 ## 下一步行动
 
 1. 执行数据库变更脚本
-2. 开始后端开发（Entity 层）
+2. 联调测试
 
 ## 风险与问题
 
