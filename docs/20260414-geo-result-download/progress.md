@@ -67,6 +67,7 @@
 - [x] 创建 ExecutorExcelExporter 接口和工厂类
 - [x] 实现 DailyPubAnalysisExcelExporter
 - [x] 创建 Excel VO 类 (DailyPubAnalysisExcelVO)
+- [x] 热词分析任务批量重试接口
 
 ### 前端改造
 - [ ] GeoAnalysisResult.jsx 添加下载按钮 (暂不实现)
