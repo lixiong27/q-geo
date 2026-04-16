@@ -738,6 +738,19 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 - [x] 实现维度计算逻辑（tagDesc/tagCode）
 - [x] 实现汇总计算逻辑
 
+### 新增 WeeklyIndustrySourceDistributionExecutor
+- [x] 新增 `WeeklySourceDistributionResult.java` 实体类
+- [x] 新增 `SourceCategoryDistribution.java` 实体类
+- [x] 新增 `ModelSourceDistribution.java` 实体类
+- [x] 新增 `WeeklyIndustrySourceDistributionExecutor.java`
+- [x] 按维度统计信源分布，支持强类型输出
+
+### 新增 WeeklyPoiSourceDistributionExecutor
+- [x] 新增 `WeeklyPoiSourceDistributionResult.java` 实体类
+- [x] 新增 `WeeklyPoiSourceDistributionExecutor.java`
+- [x] 输出综合数据 + 各维度数据
+- [x] 表格格式：类别(tag) | 模型 | 信源分类占比
+
 ## 进度记录
 
 | 日期 | 内容 | 状态 |
@@ -745,6 +758,8 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 | 2026-04-16 | 需求分析，创建技术文档 | 已完成 |
 | 2026-04-16 | 后端开发完成 | 已完成 |
 | 2026-04-16 | 方法重构，强类型响应 | 已完成 |
+| 2026-04-16 | 新增 WeeklyIndustrySourceDistributionExecutor | 已完成 |
+| 2026-04-16 | 新增 WeeklyPoiSourceDistributionExecutor | 已完成 |
 
 ## 下一步行动
 
@@ -762,7 +777,13 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 | `domain/entity/geo/analysis/WeeklyIndustryAnalysisResult.java` | 新增 |
 | `domain/entity/geo/analysis/ExecutorExecutionResponse.java` | 新增 |
 | `domain/entity/geo/analysis/response/ExecuteExecutorResponse.java` | 修改 |
+| `domain/entity/geo/analysis/WeeklySourceDistributionResult.java` | 新增 |
+| `domain/entity/geo/analysis/SourceCategoryDistribution.java` | 新增 |
+| `domain/entity/geo/analysis/ModelSourceDistribution.java` | 新增 |
+| `domain/entity/geo/analysis/WeeklyPoiSourceDistributionResult.java` | 新增 |
 | `service/geo/analysis/executor/WeeklyIndustryAnalysisExecutor.java` | 新增 |
+| `service/geo/analysis/executor/WeeklyIndustrySourceDistributionExecutor.java` | 新增 |
+| `service/geo/analysis/executor/WeeklyPoiSourceDistributionExecutor.java` | 新增 |
 | `service/geo/analysis/executor/DailyPubAnalysisExecutor.java` | 修改 |
 | `service/geo/analysis/GeoAnalysisResultService.java` | 修改 |
 | `web/GeoAnalysisController.java` | 修改 |
