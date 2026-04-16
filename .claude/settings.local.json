@@ -48,7 +48,11 @@
       "Bash(git pull:*)",
       "Bash(find /Users/apple/personal/q-geo/guide/ /Users/apple/personal/q-geo/docs/20260330-geo-init/test/ -type f -name *.md)",
       "Bash(git ls-tree:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git submodule:*)",
+      "Bash(find /Users/apple/personal/q-geo -name *.xlsx -o -name *.xls)",
+      "Bash(pip3 install:*)",
+      "Bash(mvn compile:*)"
     ]
   }
 }
