@@ -721,10 +721,16 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 - [x] 新增 `GeoAnalysisResultParams.java` 实体类
 - [x] 新增 `BatchTaskInfo.java` 实体类
 - [x] 新增 `HotWordTaskParams.java` 实体类
+- [x] 新增 `BatchTaskResult.java` 实体类
 - [x] 修改 `GeoAnalysisResultService#triggerExecution` 使用对象构建 params
 - [x] 修改 `GeoAnalysisResultService#executeExecutor` 使用对象解析 params
 - [x] 修改 `GeoAnalysisResultService#checkAndUpdateCompletion` 使用对象解析 params
 - [x] 修改 `DailyPubAnalysisExecutor#processTask` 使用 `HotWordTaskParams`
+
+### 方法重构
+- [x] 拆分 `executeExecutor` 为公开方法和私有方法
+- [x] 新增 `ExecutorExecutionResponse.java` 强类型响应
+- [x] 更新 `ExecuteExecutorResponse` 使用强类型
 
 ### 新增 WeeklyIndustryAnalysisExecutor
 - [x] 新增 `WeeklyIndustryAnalysisResult.java` 实体类
@@ -738,10 +744,11 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 |------|------|------|
 | 2026-04-16 | 需求分析，创建技术文档 | 已完成 |
 | 2026-04-16 | 后端开发完成 | 已完成 |
+| 2026-04-16 | 方法重构，强类型响应 | 已完成 |
 
 ## 下一步行动
 
-1. 提交代码
+1. 提交代码（已完成）
 2. 集成测试
 
 ## 文件清单
@@ -751,10 +758,14 @@ public class WeeklyIndustryAnalysisExecutor extends BaseGeoAnalysisExecutor {
 | `domain/entity/geo/analysis/GeoAnalysisResultParams.java` | 新增 |
 | `domain/entity/geo/analysis/BatchTaskInfo.java` | 新增 |
 | `domain/entity/hotword/HotWordTaskParams.java` | 新增 |
+| `domain/entity/hotword/BatchTaskResult.java` | 新增 |
 | `domain/entity/geo/analysis/WeeklyIndustryAnalysisResult.java` | 新增 |
+| `domain/entity/geo/analysis/ExecutorExecutionResponse.java` | 新增 |
+| `domain/entity/geo/analysis/response/ExecuteExecutorResponse.java` | 修改 |
 | `service/geo/analysis/executor/WeeklyIndustryAnalysisExecutor.java` | 新增 |
 | `service/geo/analysis/executor/DailyPubAnalysisExecutor.java` | 修改 |
 | `service/geo/analysis/GeoAnalysisResultService.java` | 修改 |
+| `web/GeoAnalysisController.java` | 修改 |
 
 ## 注意事项
 
