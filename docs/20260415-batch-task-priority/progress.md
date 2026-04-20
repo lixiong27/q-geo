@@ -243,3 +243,9 @@ createBatchAnalysisTask({ type, models, priority: selectedPriority });
 
 1. 在 QConfig 平台配置 `hotfile.properties` 添加优先级配置项
 2. 联调测试验证功能
+
+## Bug 修复记录
+
+| 日期 | 问题 | 原因 | 解决方案 |
+|------|------|------|----------|
+| 2026-04-15 | 优先级下拉框为空 | 后端返回裸数组，前端 axios 拦截器期望 `{code: 0, data/list}` 格式 | 1. 后端新增 `PriorityConfigListResponse` 包装类 2. 前端使用 `res.list` 提取数据 |
