@@ -1,41 +1,8 @@
 # 技术组件
 
-## Redis 工具
+## Redis
 
-**类路径**: `infra.util.RedisUtil`
-
-### 方法
-
-| 方法 | 用途 |
-|------|------|
-| `get(key)` | 获取缓存值 |
-| `set(key, value, seconds)` | 设置缓存（带过期时间） |
-| `exists(key)` | 判断 key 是否存在 |
-| `incr(key)` | 自增 |
-| `delete(key)` | 删除 key |
-| `tryLock(lockName)` | 获取锁（默认 30 秒过期） |
-| `tryLock(lockName, seconds)` | 获取锁（自定义过期时间） |
-| `unLock(lockName)` | 释放锁 |
-
-### 使用示例
-
-```java
-@Resource
-private RedisUtil redisUtil;
-
-// 缓存操作
-redisUtil.set("key", "value", RedisUtil.ONE_DAY_SECONDS);
-String value = redisUtil.get("key");
-
-// 分布式锁
-if (redisUtil.tryLock("lock:key")) {
-    try {
-        // 执行业务逻辑
-    } finally {
-        redisUtil.unLock("lock:key");
-    }
-}
-```
+详见 [redis.md](redis.md)
 
 ## QConfig 配置管理
 

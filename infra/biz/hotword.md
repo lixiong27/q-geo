@@ -21,11 +21,16 @@
 | `/api/hotWord/task/analysis/create` | POST | 创建分析任务 |
 | `/api/hotWord/task/batch/create` | POST | 创建批量任务 |
 | `/api/hotWord/task/callback` | POST | 任务回调 |
+| `/api/hotWord/task/priority/list` | GET | 获取优先级列表 |
 
 ## Mapper
 
 - `HotWordMapper` - 热词基础数据
 - `HotWordTaskMapper` - 任务数据
+
+## 定时任务
+
+详见 [hotword/task.md](hotword/task.md)
 
 ## 前端组件
 
