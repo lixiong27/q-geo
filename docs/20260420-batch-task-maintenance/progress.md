@@ -120,6 +120,8 @@ public class DownstreamCallbackChecker {
 | `batch.task.maintenance.days` | 7 | 查询最近 n 天的批量任务 |
 | `distributed.lock.retries` | 6 | 分布式锁最大重试次数 |
 | `distributed.lock.sleep.max` | 9 | 分布式锁最大睡眠秒数 |
+| `batch.task.maintenance.check_uncallbacked.enabled` | false | 是否启用未回调任务检查 |
+| `batch.task.maintenance.retry_failed.enabled` | false | 是否启用失败任务重试 |
 
 ## 任务清单
 
@@ -147,10 +149,11 @@ public class DownstreamCallbackChecker {
 | 2026-04-20 | 需求分析，完成技术方案设计 | 已完成 |
 | 2026-04-20 | 后端开发完成 | 已完成 |
 | 2026-04-20 | 代码提交到 GitLab | 已完成 |
+| 2026-04-21 | checkUncallbackedTasks/retryFailedSubTasks 添加 hotfile qconfig 开关，默认跳过 | 已完成 |
 
 ## 下一步行动
 
-1. 完成 - 后端开发已提交
+1. 代码提交到 GitLab
 2. 等待后续部署和验证
 
 ## 文件清单
