@@ -18,3 +18,5 @@ logs/
 
 # Config files (QConfig managed)
 geo_analysis_executor_config.json
+.codegraph/
+.cursor/
